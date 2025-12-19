@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>데이터사이언스 정의 및 핵심 요소</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gaegu&family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+ 
+    <style>
+        /*폰트*/
+        .gaegu-regular {
+            font-family: "Gaegu", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        
+*{
+    font-family: "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+        :root {
+            --bs-primary: #002d61; 
+            --bs-success: #1b5fac; 
+            --bs-info: #4A90E2; 
+            --bs-light: #ffffff; 
+            --bs-body-color: #333; 
+        }
+        .text-primary { color: var(--bs-primary) !important; }
+        .bg-primary { background-color: var(--bs-primary) !important; }
+        .text-success { color: #53a653 !important; } 
+        .bg-success { background-color: #53a653 !important; } 
+        .text-info { color: #878787 !important; } 
+        .bg-info { background-color: #878787 !important; } 
+        .text-danger { color: #D9534F !important; } 
+
+        section {
+            padding-top: 5rem; 
+            padding-bottom: 5rem;
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('img/img(1).jpg'); 
+            background-size: cover;
+            background-position: center;
+            color: white; 
+            padding: 100px 0;
+            min-height: 400px; 
+            display: flex;
+            align-items: center;
+        }
+
+        .key-elements-container {
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            background-color: white;
+            position: relative; 
+            z-index: 10;
+        }
+        .key-element-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+        .text-custom-secondary {
+            color: #666;
+        }
+        
+        /* 💡 배경 이미지와 중앙 텍스트 (수정됨: 마진 제거) */
+        .full-width-banner {
+            height: 400px; /* 배너 높이 */
+            margin-left: 50px;
+            margin-right: 50px; 
+            margin-bottom: 50px;
+            border-radius: 20px;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            
+        }
+        
+        /* 텍스트 컨테이너 스타일 (수정됨: margin: 0 auto; 추가) */
+        .banner-text-box {
+            /* 텍스트 박스 가운데 정렬 */
+            background-color: rgba(0, 0, 0, 0.5); /* 어두운 반투명 배경 */
+            margin-left: 70px;
+            padding: 30px 40px;
+            border-radius: 10px;
+            max-width: 550px; /* 텍스트 박스 최대 너비 제한 */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* 폰트 크기 조정 (3대 핵심 요소) */
+        .full-width-banner h2{
+            font-size: 1.5rem; /* 2rem에서 1.8rem으로 축소 */
+            margin-bottom: 1rem;
+        }
+
+        .full-width-banner ul {
+            padding-left: 0;
+            list-style: none;
+            font-size: 0.9rem; /* 0.95rem에서 0.9rem으로 축소 */
+            line-height: 1.6;
+            color: #e0e0e0;
+            margin-top: 1.5rem;
+        }
+        .full-width-banner ul li {
+            margin-bottom: 0.5rem;
+        }
+
+
+        /* 1. 컴퓨터 공학 (Fiber Style) */
+        .computer-science-section {
+            background: linear-gradient(rgba(77, 107, 141, 0.8), rgba(132, 150, 171, 0.8)), url('img/컴퓨터공학.png'); 
+        }
+
+        /* 2. 통계학/수학 (Ceramic Style) */
+        .stats-math-section {
+            background: linear-gradient(rgba(162, 162, 162, 0.8), rgba(216, 216, 216, 0.8)), url('img/통계학.png'); 
+            color: white; 
+        }
+        .stats-math-section .banner-text-box {
+            background-color: rgba(50, 50, 50, 0.6); 
+        }
+        .stats-math-section h2, .stats-math-section ul {
+            color: white !important; 
+        }
+        
+        /* 3. 도메인 지식 (Business/Domain Style) */
+         .domain-knowledge-section {
+            background: linear-gradient(rgba(77, 107, 141, 0.8), rgba(132, 150, 171, 0.8)), url('img/도메인.png'); 
+            margin-bottom: 100px;
+        }
+        
+        /* 맨 위로 버튼 스타일 추가 */
+        #scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none; 
+            z-index: 999;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s;
+            cursor: pointer; 
+        }
+        #scroll-to-top:hover {
+            background-color: var(--bs-primary);
+            filter: brightness(1.1);
+        }
+
+        /* 기타 본문 폰트 크기 조정 (이전 요청에서 조정된 부분) */
+        .hero-section h1 { font-size: 2.5rem !important; } /* display-4 대신 display-5 (Bootstrap 클래스를 직접 지정하지 않고 CSS로 제어) */
+        .hero-section p.lead { font-size: 1.1rem !important; }
+        .fs-5 { font-size: 1.1rem !important; } /* 데이터사이언스 정의 본문 */
+
+        .detail-button {
+        /* 버튼처럼 배경색, 패딩, 둥근 모서리 적용 */
+        display: inline-block; /* 너비 조절을 위해 블록처럼 만듦 */
+        padding: 10px 20px;
+        background-color: #8b9096; /* 파란색 배경 */
+        color: white; /* 흰색 텍스트 */
+        text-decoration: none; /* 밑줄 제거 */
+        border-radius: 5px; /* 모서리 둥글게 */
+        cursor: pointer; /* 마우스 오버 시 포인터 변경 */
+        }
+
+        /* 마우스 올렸을 때 색상 변경 효과 */
+        .detail-button:hover {
+        background-color: #686d72;
+        }
+
+        /* 네비게이션바 밝은 모드 */
+        .navbar-nav .nav-item .nav-link:not(.active) {
+            color: rgba(0, 0, 0, 0.6) !important;
+            
+        }
+        .navbar-nav .nav-item .nav-link.active {
+            color: var(--bs-primary) !important;
+            font-weight: bold;
+        }
+        
+    </style>
+</head>
+<body>
+
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <div class="container-fluid container">
+        <a class="gaegu-regular navbar-brand fw-bold text-primary" href="index.html">
+            <img src="img/logo.jpg" alt="Logo" height="24" class="d-inline-block align-text-top me-2"> 
+            Data Science
+        </a>
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link fw-normal" href="index.html">HOME</a></li>
+                <li class="nav-item"><a class="nav-link active fw-normal" aria-current="page" href="definition.html">정의</a></li> 
+                <li class="nav-item"><a class="nav-link fw-normal" href="learning.html">학습내용</a></li>
+                <li class="nav-item"><a class="nav-link fw-normal" href="career.html">역량/진로</a></li>
+                <li class="nav-item"><a class="nav-link fw-normal" href="cases.html">활용사례</a></li>
+                <li class="nav-item"><a class="nav-link fw-normal" href="resources.html">학습자원/플랫폼</a></li>
+            </ul>
+        </div>
+        </div>
+    </nav>
+    
+    <header class="hero-section text-center">
+        <div class="container">
+            <h1 class="fw-semibold text-white mb-4">
+                데이터사이언스란 무엇인가?
+            </h1>
+            <p class="lead text-white-50">
+                데이터사이언스에 대해 알아봅시다!
+            </p>
+            <div class="d-flex justify-content-center mt-5">
+                 <div class="bg-white" style="width: 50px; height: 3px;"></div> 
+            </div>
+        </div>
+    </header>
+    
+    <section class="bg-light pt-6 pb-4 border-bottom">
+        <div class="container">
+             <div class="row justify-content-center">
+                 <div class="col-lg-10">
+                      <div class="text-center mb-5 pb-5 border-bottom border-2">
+                             <h2 class="fs-2 fw-bold text-dark mb-2">
+                                 데이터사이언스 정의
+                             </h2>
+                             <p class="lead text-secondary mt-4">
+                                 Data Science: 통찰력을 이끌어내는 학제적 탐구
+                             </p>
+                         </div>
+
+                       <h3 class="fw-bold text-primary mb-4"><i class="bi bi-card-text me-2"></i> 데이터사이언스란?</h3>
+                     <p class="fs-5 text-dark mb-3" style="line-height: 30px;">
+                         데이터사이언스는 <span class="text-decoration-underline">컴퓨터 과학, 통계/수학, 도메인 지식</span> 세 분야를 융합하여 정형/비정형 데이터에서 <span class="text-decoration-underline fw-normal">지식과 통찰력</span>을 추출하는 학제적인 분야입니다. 
+                         <br>궁극적인 목표는 데이터를 모델링하고 분석하여 현실의 복잡한 문제를 해결하고 가치를 창출하는 데 있습니다.
+                     </p>
+                     
+                     <p class="fs-5 text-dark mb-3" style="line-height: 30px;">
+                         데이터는 인간이 직접 볼 수 없는 설비, 기업, 산업, 사회 등의 시스템을 간접적으로 관찰할 수 있게 해주는 귀한 자원으로, 시스템의 가치 창출과 연결되어 미래의 원유라고 불리고 있다. 
+                         특히, IoT 기술 발전과 함께 더 많은 데이터가 생산되면서 과거에 불가능했던 많은 일이 가능해지고 이를 활용하여 무궁무진한 가치를 만들어 낼 수 있게 되었다. 
+                         동시에 데이터를 통해 가치를 창출하는 일련의 과정을 수행할 인력에 대한 수요가 급증하고 있다.</p>
+                    
+                     <p class="fs-5 text-dark mb-4 pb-4" style="line-height: 30px;">
+                         데이터사이언스는 데이터가 반영하는 사회 및 산업과 매우 밀접하게 연관되어 있다. 
+                         <br>즉, 데이터과학자, 데이터분석가, 데이터엔지니어 등 데이터 분야 전문 인력은 기술자인 동시에 데이터가 생산되는 현장과 소통하고, 데이터가 활용될 산업을 이해하고, 데이터 분석을 통해 도출한 인사이트를 전달할 수 있는 사회학자로의 역량을 보유하고 있어야 한다. 따라서, 데이터사이언스학과에서는 데이터사이언스 이론과 기술 교육과 동시에 빠르게 도메인을 이해하고, 다양한 배경을 가진 사람들과 소통할 수 있는 능력 함양을 위한 교육과정도 제공한다.</p>
+                     <div class="mb-5 pb-2 border-bottom border-2"></div>
+                 </div>
+             </div>
+
+                <div class="container col-lg-10">
+                     <h3 class="fw-bold text-primary mt-4 mb-4">
+                         <i class="bi bi-diagram-3-fill me-2 text-primary"></i> 
+                         데이터사이언스의 3대 핵심 요소 
+                     </h3>
+                      <p class="lead text-secondary fs-5 mx-auto fw-normal">
+                      데이터사이언스는 <span class="text-decoration-underline">기술 (컴퓨터 공학), 이론 (통계학/수학), 응용 (도메인 지식)</span>이 교차하는 지점에 위치하여 실질적인 가치를 창출합니다.
+                      </p>
+                </div>
+            
+            <div class="row justify-content-center" style="margin-top: 80px;">
+                <div class="col-12">
+                    
+                    <section class="full-width-banner computer-science-section mb-4">
+                        <div class="container-fluid banner-content">
+                            <div class="banner-text-box">
+                                <h2 class="fw-semibold text-white" style="opacity: 0.95;">
+                                    컴퓨터 공학
+                                </h2>
+                                <ul class="list-unstyled text-white-75 mx-auto">
+                                    <li class="mb-2 fw-light"><i class="bi bi-cpu me-2"></i> <span class="text-decoration-underline">프로그래밍 능력</span>: Python/R 기반 데이터 처리 및 모델 개발</li>
+                                    <li class="mb-2 fw-light"><i class="bi bi-collection-fill me-2"></i> <span class="text-decoration-underline">빅데이터 처리</span>: 대규모 데이터셋 관리 및 분산 처리 기술</li>
+                                    <li class="mb-2 fw-light"><i class="bi bi-speedometer me-2"></i> <span class="text-decoration-underline">알고리즘 및 구현</span>: 효율적인 데이터 분석을 위한 알고리즘 설계</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section class="full-width-banner stats-math-section mb-4">
+                        <div class="container-fluid banner-content">
+                            <div class="banner-text-box">
+                                <h2 class="fw-semibold text-white" style="opacity: 0.95;">
+                                    통계학/수학
+                                </h2>
+                                <ul class="list-unstyled text-white-75 mx-auto">
+                                    <li class="mb-2 fw-light"><i class="bi bi-graph-up me-2"></i> <span class="text-decoration-underline">통계 모델링</span>: 데이터 분석 및 가설 검증의 핵심 이론</li>
+                                    <li class="mb-2 fw-light"><i class="bi bi-infinity me-2"></i> <span class="text-decoration-underline">선형 대수</span>: 머신러닝 모델을 이해하고 최적화하는 기본 도구</li>
+                                    <li class="mb-2 fw-light"><i class="bi bi-dice-5 me-2"></i> <span class="text-decoration-underline">확률론</span>: 불확실성 기반 의사결정 및 예측의 수학적 근거</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section class="full-width-banner domain-knowledge-section">
+                        <div class="container-fluid banner-content">
+                            <div class="banner-text-box">
+                                <h2 class="fw-semibold text-white" style="opacity: 0.95;">
+                                    도메인 지식
+                                </h2>
+                                <ul class="list-unstyled text-white-75 mx-auto">
+                                    <li class="mb-2 fw-light"><i class="bi bi-lightbulb me-2"></i> <span class="text-decoration-underline">문제 정의</span>: 데이터를 통해 해결할 현실의 비즈니스 문제 식별</li>
+                                    <li class="mb-2 fw-light"><i class="bi bi-clipboard-check me-2"></i> <span class="text-decoration-underline">결과 해석</span>: 분석 결과를 실질적인 통찰(Insight)로 전환하고 적용</li>
+                                    <li class="mb-2 fw-light"><i class="bi bi-person-fill-lock me-2"></i> <span class="text-decoration-underline">윤리 및 책임</span>: 분야별 데이터 활용의 법규 및 윤리적 고려사항</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                    
+                </div>
+            </div>
+            </div>
+
+    </section>
+    
+    
+    <section class="bg-white border-top border-bottom">
+        
+            <div class="row justify-content-center">
+                <div class="col-lg-9">
+                    <h3 class="fw-bold text-danger mb-4">
+                        <i class="bi bi-shield-lock-fill me-2 text-danger"></i>
+                         데이터 윤리의 중요성 및 위험 요소
+                    </h3>
+                    <p class="fs-6 text-custom-secondary" style="line-height: 30px;">
+                        데이터사이언스는 사회에 막대한 영향력을 행사하므로 <span class="text-decoration-underline">윤리적 책임</span>이 필수적입니다. 특히 <span class="text-decoration-underline">데이터 편향 (Data Bias), 책임성 (Accountability), 설명 가능성 (Explainability)</span> 문제는 데이터 과학자가 반드시 직면하고 해결해야 할 핵심 위험 요소입니다. 
+                        기술이 사회에 긍정적인 영향을 미치도록 <span class="text-decoration-underline">공정성, 투명성, 개인정보 보호</span>를 핵심 가치로 삼아야 합니다.
+                    </p>
+                    <ul class="list-unstyled lh-lg mt-4 fs-5">
+                        <li class="fw-semibold"><i class="bi bi-1-circle"></i> &nbsp;데이터 편향 및 공정성 <span class="small">: 학습 데이터에 내재된 편향이 알고리즘에 반영되어 특정 집단에게 차별적인 결과를 초래하지 않도록 식별하고 제거하는 능력</span></li>
+                        <li class="fw-semibold"><i class="bi bi-2-circle"></i> &nbsp;설명 가능성 및 투명성 <span class="small">: 모델이 왜 그러한 의사결정을 내렸는지 이해하고 설명할 수 있어야 하며, 이는 신뢰 확보의 기초가 됩니다.</span></li>
+                        <li class="fw-semibold"><i class="bi bi-3-circle"></i> &nbsp;개인정보 보호 <span class="small">: 데이터 수집 및 활용 시 법규(GDPR, 국내 개인정보보호법 등)를 준수하고, 익명화 기술 및 차분 프라이버시 등을 적용하는 능력</span></li>
+                        <li class="fw-semibold"><i class="bi bi-4-circle"></i> &nbsp;책임성 <span class="small">: AI 시스템의 오작동 또는 유해한 결과에 대한 책임을 명확히 규정하고 추적할 수 있는 시스템 구축</span></li>
+                        <li class="fw-semibold"><i class="bi bi-5-circle"></i> &nbsp;악용 가능성 <span class="small">: 개발된 기술이 감시, 조작, 허위 정보 유포 등 사회적으로 해로운 목적으로 사용되지 않도록 기술적/제도적 안전장치를 마련하는 능력</span></li>
+                    </ul>
+                </div>
+            </div>
+    </section>
+
+    <section class="bg-light border-top border-bottom">
+        <div class="container col-lg-9">
+            <h3 class="fw-bold text-dark mb-4">
+                <i class="bi bi-file-bar-graph me-2 text-primary"></i> 주요 협력 및 산학 연계
+            </h3>
+            <p class="text-secondary mb-4" style="line-height: 30px;">
+                데이터사이언스 학과는 기업, 공공기관 및 연구소와의 활발한 협력을 통해 
+                학생들에게 실질적인 경험과 폭넓은 진로 기회를 제공합니다. 
+                <br>
+                (산학협력 분야: AI/플랫폼, 핀테크, 스마트 팩토리, 헬스케어)
+            </p>
+                
+            
+            <div class="d-flex align-items-center flex-wrap gap-4 mt-4">
+
+                
+                <img src="img/네이버.jpeg" alt="협력사1" style="height: 50px; opacity: 0.6;">
+                <img src="img/금융보안원.jpeg" alt="협력사2" style="height: 50px; opacity: 0.6;">
+                <img src="img/한국데이터산업진흥원.png" alt="협력사3" style="height: 50px; opacity: 0.6;">
+                <img src="img/한국보건산업진흥원.png" alt="협력사4" style="height: 50px; opacity: 0.6;">
+                <img src="img/과학기술정보통신부.png" alt="협력사4" style="height: 50px; opacity: 0.6;">
+                <br>
+                <a href="resources.html#target-section" class="detail-button fw-normal">자세히</a>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="bg-light text-dark py-5 border-top">
+        <div class="container text-center">
+             <hr>
+            <div class="text-center text-secondary mt-4 mb-2">
+                <p class="mb-1 small">
+                    01797 서울시 노원구 화랑로 621 데이터사이언스학과 | TEL. (02) 123-4567 | FAX. (02) 123-4568
+                </p>
+            </div>
+
+            <div class="text-center text-secondary">
+                <p class="mb-0 small">Copyright 2025 Data Science Guide. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <button onclick="topFunction()" id="scroll-to-top" class="btn btn-primary">
+        <i class="bi bi-arrow-up-short fs-4"></i>
+    </button>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <script>
+        // Get the button
+        let mybutton = document.getElementById("scroll-to-top");
+
+        // When the user scrolls down 100px from the top of the document, show the button
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
+    </script>
+</body>
+</html>

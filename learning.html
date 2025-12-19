@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>데이터사이언스 학습 로드맵 - DS Guide</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gaegu&family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+ 
+    <style>
+        /*폰트*/
+    
+        *{
+            font-family: "Noto Sans KR", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400; 
+            font-style: normal;
+        }
+        .fw-bold { font-weight: 700 !important; }
+        .fw-bolder { font-weight: 900 !important; }
+        .fw-light { font-weight: 300 !important; }
+
+        .gaegu-regular {
+            font-family: "Gaegu", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        /* 밝은 모드 컬러 변수 재정의 */
+        :root {
+            --bs-primary: #002d61; /* 진한 파랑 */
+            --bs-a: rgb(82, 110, 146) ;
+            --bs-b: #253f58 ;
+            --bs-c: #7ba1cf ;
+            --bs-background: #f8f9fa; /* 흰색 배경 */
+            --bs-card-bg: #fcfcfc; /* 섹션 배경 (아주 밝은 회색) */
+            --bs-text: #333333; /* 어두운 텍스트 */
+            --bs-secondary-text: #6c757d; /* 보조 텍스트 */
+            --bs-border: #d1d8df; /* 경계선 */
+
+            /* 단계별 강조 색상 */
+            --step-1-color: #315a77;
+            --step-2-color: #5ca7b8;
+            --step-3-color: #1b5fac;
+            --step-4-color: #6392c7;
+            --step-5-color: #92b1d3;
+        }
+        
+    
+        body {
+            background-color: var(--bs-background);
+            color: var(--bs-text);
+        }
+        .text-primary { color: var(--bs-primary) !important; }
+        .text-a { color: var(--bs-a) !important; }
+        .text-b { color: var(--bs-b) !important; }
+        .text-c { color: var(--bs-c) !important; }
+        .bg-primary { background-color: var(--bs-primary) !important; }
+        .text-secondary { color: var(--bs-secondary-text) !important; }
+
+        /* 네비게이션바 밝은 모드 */
+        .navbar-nav .nav-item .nav-link:not(.active) {
+            color: rgba(0, 0, 0, 0.6) !important;
+            
+        }
+        .navbar-nav .nav-item .nav-link.active {
+            color: var(--bs-primary) !important;
+            font-weight: bold;
+        }
+
+    
+        /* 메인 헤더 (사용자 요청 반영) */
+        .main-header {
+            /* 배경 이미지 URL을 실제 이미지 경로로 변경해야 합니다. 임시로 'background_image.jpg'를 사용했습니다. */
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('img/img(1).jpg'); 
+            background-size: cover; 
+            background-position: center;
+            color: white;
+            min-height: 400px;
+            padding: 100px 0; 
+            display: flex; 
+        }
+        .main-header h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: white;
+            margin-top: 20px;
+        }
+        .main-header p {
+            font-size: 1.1rem;
+            color: #ccc;
+            margin-top: 20px;
+        }
+        .main-header .divider {
+            width: 50px;
+            height: 3px;
+            background-color: white;
+            margin: 50px auto 0;
+        }
+
+        /* 단계별 섹션 스타일 */
+        .step-section {
+            background-color: var(--bs-card-bg);
+            border-left: 5px solid var(--bs-primary);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+            border: 1px solid var(--bs-border); 
+        }
+
+        /* 단계별 색상 아이콘 및 제목 */
+        .step-header {
+            color: var(--bs-text);
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed var(--bs-border);
+        }
+        .step-header .bi {
+            font-size: 1.8rem;
+            margin-right: 15px;
+        }
+
+        /* 상세 내용 목록 스타일 */
+        .step-detail ul {
+            padding-left: 20px;
+        }
+        .step-detail ul li {
+            margin-bottom: 5px;
+            color: var(--bs-text);
+        }
+        .step-detail .sub-title {
+            color: var(--bs-b);
+            border-left: 3px solid var(--bs-primary);
+            padding-left: 10px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: 600 !important;
+        }
+
+        /* 중요 개념 더 알아보기 버튼 */
+        .concept-button {
+            background-color: #e9f4ff; /* light blue background */
+            color: var(--bs-primary);
+            border: 1px solid #ddeeff;
+            text-align: left;
+            margin: 10px 0;
+            transition: background-color 0.3s;
+        }
+        .concept-button:hover {
+            background-color: #cceeff;
+        }
+        .concept-button .bi {
+            transition: transform 0.3s;
+        }
+        .concept-button[aria-expanded="true"] .bi-caret-down-fill {
+            transform: rotate(180deg);
+        }
+        .concept-collapse-body {
+            background-color: #f6faff; /* very light blue for detail */
+            border-left: 5px solid #739bc6;
+            padding: 15px;
+            margin-top: 10px;
+            font-size: 0.95rem;
+            border-radius: 4px;
+        }
+        .concept-collapse-body .text-info {
+            color: #688fc9 !important;
+        }
+
+        /* 최종 로드맵 요약 테이블 스타일 */
+        .roadmap-table th {
+            background-color: var(--bs-a);
+            color: white;
+            text-align: center;
+            border-color: var(--bs-border);
+        }
+        .roadmap-table td {
+            vertical-align: top;
+            padding: 10px;
+            border-color: var(--bs-border);
+            background-color: var(--bs-background);
+        }
+        .roadmap-table tr:nth-child(even) td {
+            background-color: var(--bs-card-bg);
+        }
+
+
+        /* 핵심 기법/도구 표 스타일 */
+        .tech-table th {
+            background-color: #e9ecef;
+            text-align: center;
+            font-weight: 500;
+            border-color: var(--bs-border);
+        }
+        .tech-table td {
+            font-size: 0.9rem;
+            border-color: var(--bs-border);
+            background-color: var(--bs-background);
+        }
+        
+        /* 푸터 스타일 */
+        footer {
+            background-color: #343a40 !important; 
+        }
+
+        /* 맨 위로 버튼 스타일 추가 */
+        #scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none; 
+            z-index: 999;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+        #scroll-to-top:hover {
+            background-color: var(--bs-primary);
+            filter: brightness(1.2);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+        <div class="container-fluid container">
+            <a class="gaegu-regular navbar-brand fw-bold text-primary" href="index.html">
+                <img src="img/logo.jpg" alt="Logo" height="24" class="d-inline-block align-text-top me-2"> 
+                Data Science
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link fw-normal" href="index.html">HOME</a></li>
+                    <li class="nav-item"><a class="nav-link fw-normal" href="definition.html">정의</a></li> 
+                    <li class="nav-item"><a class="nav-link active fw-normal" aria-current="page" href="learning.html">학습내용</a></li>
+                    <li class="nav-item"><a class="nav-link fw-normal" href="career.html">역량/진로</a></li>
+                    <li class="nav-item"><a class="nav-link fw-normal" href="cases.html">활용사례</a></li>
+                    <li class="nav-item"><a class="nav-link fw-normal" href="resources.html">학습자원/플랫폼</a></li> 
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <header class="main-header text-center">
+        <div class="container">
+            <h1 class="mb-3">데이터사이언스에서는 무엇을 배울까?</h1>
+            <p class="lead text-white-50 mb-0">
+                데이터사이언스 학습 내용에 대해 알아봅시다!
+            </p>
+            <div class="divider"></div>
+        </div>
+    </header>
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+        <div class="col-12 col-md-10">
+        
+        <h1 class="text-center mb-3 fw-bold text-dark pt-4 fs-2">
+            데이터사이언스 학습 로드맵
+        </h1>
+        <p class="lead text-center text-secondary mb-5 border-bottom pb-5">
+            데이터사이언스를 위한 핵심 기술들
+        </p>
+
+        <!--요약 표-->
+        <h2 class="fw-semibold text-primary mb-3 fs-3"> 
+            <i class="bi bi-book"></i> 요약</h2>
+        <div class="table-responsive mb-5 shadow">
+            <table class="table table-bordered roadmap-table">
+                <thead>
+                    <tr>
+                        <th style="width: 1%;"></th>
+                        <th style="width: 20%;">핵심 목표</th>
+                        <th style="width: 35%;">주요 학습 내용</th>
+                        <th style="width: 35%;">핵심 기술 스택</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="fw-bold text-a"><i class="bi bi-1-circle-fill me-2"></i></td>
+                        <td><a href="#a" class="text-c">기초 및 환경 설정</a></td>
+                        <td>프로그래밍 언어 문법, 자료구조, 선형대수/통계 기본</td>
+                        <td>Python (Pandas/NumPy), SQL, Git</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-a"><i class="bi bi-2-circle-fill me-2"></i></td>
+                        <td><a href="#b" class="text-c">데이터 전처리/정제</a></td>
+                        <td>데이터 수집, 결측치/이상치 처리, 피처 엔지니어링</td>
+                        <td>Pandas, Scrapy (크롤링), SQL 고급 쿼리</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-a"><i class="bi bi-3-circle-fill me-2"></i></td>
+                        <td><a href="#c" class="text-c">시각화 및 탐색</a></td>
+                        <td>EDA 수행, 효과적인 차트 제작, 대시보드 구축</td>
+                        <td>Matplotlib, Seaborn, Tableau/Power BI</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-a"><i class="bi bi-4-circle-fill me-2"></i></td>
+                        <td><a href="#d" class="text-c">머신러닝 모델링</a></td>
+                        <td>회귀/분류 모델 구축, 앙상블 기법, 모델 최적화/평가</td>
+                        <td>Scikit-learn, XGBoost, 통계적 학습 이론</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-a"><i class="bi bi-5-circle-fill me-2"></i></td>
+                        <td><a href="#e" class="text-c">딥러닝 및 응용</a></td>
+                        <td>비정형 데이터 분석, 빅데이터 처리, 실무 프로젝트</td>
+                        <td>TensorFlow/PyTorch, CNN/RNN/Transformer, Hadoop/Spark</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <h2 class="fw-semibold text-primary mb-4 border-bottom pb-2 fs-3">
+            <i class="bi bi-laptop"></i> &nbsp;단계별 상세 내용</h2>
+
+
+
+        <!--1번-->   
+        <div class="step-section shadow p-4 mb-5" id="a">
+            <h3 class="step-header fs-4">
+                <i class="bi bi-1-circle-fill text-b"></i>데이터 준비 및 기초 (Programming & Foundational Math)
+            </h3>
+            <p class="text-secondary mb-4">
+                분석 도구를 익히고 모든 데이터 과학 분야의 근간이 되는 프로그래밍 지식과 수학적 언어를 습득하는 단계입니다. 
+                <br>이 기반이 튼튼해야 다음 단계의 복잡한 알고리즘을 이해하고 구현할 수 있습니다.
+            </p>
+
+            <div class="step-detail">
+                <h5 class="fw-bold mb-4">목표: 분석 도구 숙련 및 모델링에 필요한 수학적 기반 확보</h5>
+                
+                <div class="sub-title">프로그래밍 및 데이터 언어 (Python 중심)</div>
+                <ul>
+                    <li>Python 언어: 기본 문법, 조건문, 반복문, 함수, 클래스 등 객체 지향 프로그래밍(OOP) 기초</li>
+                    <li>데이터 구조 및 알고리즘: 효율적인 데이터 처리 및 메모리 관리를 위한 기본 개념 학습</li>
+                    <li>데이터 처리 라이브러리: Pandas를 이용한 데이터프레임 생성/병합/필터링, NumPy를 이용한 고성능 벡터/행렬 연산</li>
+                </ul>
+                
+                <div class="sub-title">수학 및 통계 기초</div>
+                <ul>
+                    <li>선형대수학: 벡터, 행렬 연산, 고유값/고유벡터, SVD, PCA 등 데이터 변환 및 차원 축소에 필요한 개념</li>
+                    <li>미적분학: 미분 기본, <span class="text-decoration-underline">경사 하강법(Gradient Descent)</span> 등 최적화 원리 이해</li>
+                    <li>기초 통계: 기술 통계량 (평균, 분산), 확률 분포 (정규 분포), 중심 극한 정리, 표본 추출 이론</li>
+                </ul>
+            </div>
+            
+            <button class="btn concept-button w-100" type="button" data-bs-toggle="collapse" data-bs-target="#conceptOne" aria-expanded="false" aria-controls="conceptOne">
+                <i class="bi bi-caret-down-fill me-2"></i>경사 하강법 -? (Gradient Descent)
+            </button>
+            <div class="collapse" id="conceptOne">
+                <div class="concept-collapse-body">
+                    <p class="fw-bold">
+                        <i class="bi bi-arrow-down-square-fill text-dark me-2"></i> 경사 하강법 (Gradient Descent) 이란?
+                    </p>
+                    <p>
+                        경사 하강법은 머신러닝 모델 학습의 핵심인 최적화 알고리즘입니다. 
+                        <br>모델의 예측 오류(손실 함수)를 최소화하기 위해, 손실 함수의 기울기(경사)를 따라 조금씩 이동하며 최적의 가중치(W)와 편향(b) 값을 찾는 방법입니다.
+                    </p>
+                    <ul class="mb-5">
+                        <li>기울기(Gradient): 현재 위치에서 손실 함수가 가장 가파르게 증가하는 방향을 나타냅니다.</li>
+                        <li>학습률(Learning Rate): 한 번 이동할 때 경사를 따라 얼마나 크게 움직일지를 결정하는 값입니다. 
+                            <br>이 값이 너무 크면 최적점을 지나칠 수 있고, 너무 작으면 학습 속도가 느려집니다.</li>
+                    </ul>
+                    <img src="img/경사하강법.AVIF">
+                </div>
+            </div>
+            
+            <h5 class="fw-bold text- mt-4 mb-3">
+                <i class="bi bi-gear"></i>&nbsp; 핵심 기법 및 도구</h5>
+            <div class="table-responsive">
+                <table class="table table-bordered tech-table">
+                    <thead>
+                        <tr>
+                            <th>기법/영역</th>
+                            <th>상세 내용</th>
+                            <th>핵심 도구/라이브러리</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>언어 및 문법</td>
+                            <td>파이썬/R 스크립트 작성, 함수형 프로그래밍, OOP 개념</td>
+                            <td>Python, R, Jupyter Notebook, VS Code</td>
+                        </tr>
+                        <tr>
+                            <td>데이터 조작</td>
+                            <td>데이터프레임 필터링, 그룹화, 피벗 테이블, 시리즈 연산</td>
+                            <td>Pandas, NumPy, R Tidyverse</td>
+                        </tr>
+                        <tr>
+                            <td>수학적 기반</td>
+                            <td>행렬 연산, 미분, 확률 밀도 함수(PDF) 이해</td>
+                            <td>Matplotlib (수학 시각화), SymPy (심볼릭 연산)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+
+
+
+
+        <!--2번-->
+        <div class="step-section shadow p-4 mb-5" id="b">
+            <h3 class="step-header fs-4">
+                <i class="bi bi-2-circle-fill text-b"></i>데이터 수집, 정제, 및 전처리 (Preprocessing)
+            </h3>
+            <p class="text-secondary">
+                전체 분석 과정에서 가장 많은 시간을 투자해야 하는 단계로, 원시 데이터를 모델링에 적합하도록 클리닝하고 변환하는 핵심 실무 역량을 키웁니다.
+            </p>
+
+            <div class="step-detail">
+                <h5 class="fw-bold mb-4">목표: 모델링에 적합하도록 원시 데이터를 클리닝 및 변환</h5>
+                
+                <div class="sub-title">데이터 수집 및 관리</div>
+                <ul>
+                    <li>데이터베이스 (RDBMS): SQL (SELECT, INSERT, UPDATE, DELETE) 및 테이블 JOIN (Inner, Outer, Left/Right)을 통한 데이터 통합</li>
+                    <li>빅데이터: 분산 파일 시스템(HDFS) 및 NoSQL 데이터베이스(MongoDB, Cassandra)의 기본 개념</li>
+                    <li>외부 데이터 수집: 웹 크롤링 (BeautifulSoup, Selenium) 및 API 연동을 통한 비정형 데이터 수집</li>
+                </ul>
+
+                <div class="sub-title">데이터 전처리 (Data Preprocessing) 심화</div>
+                <ul>
+                    <li>결측치 처리: 단순 대체를 넘어 MICE, KNN Imputation 등 통계적/모델 기반 대체 기법</li>
+                    <li>이상치 탐지: IQR, Z-score, Isolation Forest 등 알고리즘 기반 이상치 식별 및 처리 전략 수립</li>
+                    <li>데이터 변환: 로그 변환 (Log Transformation) 및 제곱근 변환 등 비대칭 분포 데이터의 정규성 확보</li>
+                    <li>스케일링: Min-Max Normalization과 Standard Scaling의 차이점 및 적용 시기 이해</li>
+                    <li>피처 엔지니어링: 도메인 지식을 활용하여 날짜 데이터 분할, 범주형 변수 조합 등 모델 성능 향상을 위한 파생 변수 생성</li>
+                </ul>
+            </div>
+
+            <button class="btn concept-button w-100" type="button" data-bs-toggle="collapse" data-bs-target="#conceptTwo" aria-expanded="false" aria-controls="conceptTwo">
+                <i class="bi bi-caret-down-fill me-2"></i> 데이터 스케일링-? (Data Scaling)
+            </button>
+            <div class="collapse" id="conceptTwo">
+                <div class="concept-collapse-body">
+                    <p class="fw-bold">
+                        <i class="bi bi-justify text-info me-2">
+                        </i> 
+                        1. Min-Max 스케일링
+                    <p>
+                        데이터를 최솟값(Min)과 최댓값(Max)을 사용하여 특정 범위(보통 0과 1 사이)로 정규화(Normalization)하는 방법입니다. 
+                        <br>데이터의 분포 형태는 유지됩니다.
+                    </p>
+                    &nbsp;
+                    <img src="img/minmax.png" alt="minmax" style="height: 100px; opacity: 0.6;" class="mb-3">
+                    
+                    <ul class="mb-0">
+                        <li>특징: 모든 특성 값을 동일한 0과 1 사이의 범위로 변환합니다.</li>
+                        <li>단점: 데이터에 이상치(Outlier)가 있을 경우, 최댓값이나 최솟값이 크게 영향을 받아 데이터가 좁은 범위에 몰리게 될 수 있습니다.</li>
+                        <li>주요 사용처: 신경망의 활성화 함수(Sigmoid, Tanh)처럼 입력 값의 범위가 특정 범위(예: 0~1)로 제한될 때</li>
+                </div>
+                <div class="concept-collapse-body">
+                    <p class="fw-bold">
+                        <i class="bi bi-justify text-info me-2">
+                        </i> 
+                    2. 표준화 (Standardization)
+                    <p>
+                        데이터를 평균이 0이 되도록, 그리고 표준편차가 1이 되도록 변환하는 방법입니다. 
+                        <br>이는 Z-Score 정규화라고도 불립니다.
+                        <p></p>
+                    &nbsp;
+                    <img src="img/Z-score.png" alt="Z-score" style="height: 100px; opacity: 0.6;" class="mb-3">
+                    
+                    <ul class="mb-0">
+                        <li>특징: 데이터의 실제 최솟값/최댓값에 의존하지 않으므로 이상치에 덜 민감합니다. 
+                            변환 후에도 특정 범위로 제한되지는 않습니다.</li>
+                        <li>장점: 데이터가 가우시안 분포(정규 분포)를 따를 때 특히 유용하며, 경사 하강법 기반 모델의 수렴 속도를 개선하는 데 효과적입니다.</li>
+                        <li>주요 사용처: 선형 모델(회귀, 로지스틱), 거리 기반 모델(KNN, K-평균), 그리고 이상치의 영향을 줄여야 할 때</li>
+                        </ul>
+                    </p></p></div>
+
+
+    
+            </div>
+
+            <button class="btn concept-button w-100" type="button" data-bs-toggle="collapse" data-bs-target="#FeatureEngineering" aria-expanded="false" aria-controls="FeatureEngineering">
+    <i class="bi bi-caret-down-fill me-2"></i> 피처 엔지니어링 (Feature Engineering)
+</button>
+<div class="collapse" id="FeatureEngineering">
+    <div class="concept-collapse-body">
+        <p class="fw-bold">
+            <i class="bi bi-arrows-fullscreen text-info me-2"></i> 피처 엔지니어링 (Feature Engineering)
+        </p>
+        <p>
+            피처 엔지니어링은 도메인 지식을 활용하여 기존 원시 데이터로부터 모델 학습에 사용할 새롭고 의미 있는 특성(Feature)을 생성하는 과정입니다. 데이터 전처리 중에서도 가장 창의적이며 모델 성능에 결정적인 영향을 미칩니다.
+        </p>
+        <ul class="mb-0">
+            <li>예시: '생년월일' 데이터를 '나이', '요일', '계절' 등으로 분리하거나, 두 변수 '가격'과 '수량'을 곱하여 '총매출'이라는 새로운 특성을 만드는 것.</li>
+            <li>목표: 모델이 데이터의 패턴을 더 쉽게 찾고 일반화 능력을 높이도록 돕는 것입니다.</li>
+        </ul>
+    </div>
+</div>
+            
+
+            <h5 class="fw-bold mt-4 mb-3">
+                <i class="bi bi-gear"></i>&nbsp; 핵심 기법 및 도구</h5>
+            <div class="table-responsive">
+                <table class="table table-bordered tech-table">
+                    <thead>
+                        <tr>
+                            <th>기법/영역</th>
+                            <th>상세 내용</th>
+                            <th>핵심 도구/라이브러리</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>데이터 수집</td>
+                            <td>SQL 고급 쿼리 (서브쿼리, 윈도우 함수), 웹 크롤링 파이프라인 구축</td>
+                            <td>SQL, Python requests, BeautifulSoup, Selenium</td>
+                        </tr>
+                        <tr>
+                            <td>결측치 처리</td>
+                            <td>평균/중앙값 대체, 시계열 데이터의 LOCF, 모델 기반 Imputation</td>
+                            <td>Pandas `.fillna()`, Scikit-learn SimpleImputer</td>
+                        </tr>
+                        <tr>
+                            <td>정규화/표준화</td>
+                            <td>MinMaxScaler, StandardScaler, RobustScaler 적용 및 선택 기준</td>
+                            <td>Scikit-learn Preprocessing 모듈</td>
+                        </tr>
+                        <tr>
+                            <td>피처 엔지니어링</td>
+                            <td>특성 상호작용 생성, 원-핫 인코딩(One-Hot Encoding), 레이블 인코딩</td>
+                            <td>Pandas `.get_dummies()`, Scikit-learn OneHotEncoder</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!--3번-->
+        <div class="step-section shadow p-4 mb-5" id="c">
+            <h3 class="step-header fs-4">
+                <i class="bi bi-3-circle-fill text-b"></i>탐색적 분석(EDA) 및 시각화 (Visualization)
+            </h3>
+            <p class="text-secondary">
+                데이터의 초기 패턴과 이상 징후를 파악하고, 분석 과정과 결과를 비즈니스 의사결정권자에게 효과적으로 소통하기 위한 기술을 배웁니다.
+            </p>
+
+            <div class="step-detail">
+                <h5 class="fw-bold mb-4"> 목표: 데이터의 숨겨진 패턴을 파악하고 분석 결과를 효과적으로 소통</h5>
+                
+                <div class="sub-title">탐색적 데이터 분석 (EDA)</div>
+                <ul>
+                    <li>기술 통계: 그룹별/변수별 평균, 분산, 사분위수 등 계산을 통한 데이터 초기 이해</li>
+                    <li>데이터 관계: 상관관계 분석 (Correlation Matrix), 분산 분석 (ANOVA)을 통한 변수 간의 연관성 검토</li>
+                    <li>가설 설정: EDA 결과를 바탕으로 이후 모델링 방향을 설정할 수 있는 잠정적인 가설 도출</li>
+                </ul>
+                
+                <div class="sub-title">데이터 시각화 및 전달 (Visualization)</div>
+                <ul>
+                    <li>기본 시각화: Matplotlib을 이용한 기본 차트 (막대, 선, 산점도) 및 Seaborn을 이용한 통계적 시각화 (Violin, Pair Plot)</li>
+                    <li>고급 시각화: Plotly, Bokeh 등 인터랙티브(대화형) 시각화 도구를 활용하여 사용자가 직접 데이터를 탐색할 수 있는 환경 제공</li>
+                    <li>대시보드: Tableau, Power BI 등의 BI 툴을 이용한 데이터 기반 의사결정 지원 시스템(DSS) 구축</li>
+                    <li><span class="text-decoration-underline">스토리텔링</span>: 분석 결과에 따라 차트 유형을 선정하고, 데이터가 전달하는 메시지를 명확하게 구성하는 능력</li>
+                </ul>
+                
+
+                <img src="img/matplotlib.png" alt="시각화1" style="height: 200px; opacity: 0.6;">
+                <img src="img/Plotly.png" alt="시각화2" style="height: 200px; opacity: 0.6;">
+                <img src="img/Tableau.png" alt="시각화3" style="height: 200px; opacity: 0.6;">
+
+
+            </div>
+
+            <button class="btn concept-button w-100" type="button" data-bs-toggle="collapse" data-bs-target="#conceptThree" aria-expanded="false" aria-controls="conceptThree">
+                <i class="bi bi-caret-down-fill me-2"></i> 주요 개념 더 알아보기: 데이터 스토리텔링
+            </button>
+            <div class="collapse" id="conceptThree">
+                <div class="concept-collapse-body">
+                    <p class="fw-bold">
+                        <i class="bi bi-book text-info me-2"></i> 데이터 스토리텔링 (Data Storytelling)
+                    </p>
+                    <p>
+                        데이터 스토리텔링은 단순한 수치나 그래프를 넘어, 분석 결과를 청중이 이해하기 쉬운 서사(Narrative)로 구성하고 전달하는 능력입니다. 효과적인 데이터 스토리텔링은 듣는 사람의 행동 변화를 유도하는 핵심 기술입니다.
+                    </p>
+                    <ul class="mb-0">
+                        <li>구성 요소: 데이터(정확성), 시각화(명료성), 서사(맥락과 통찰)</li>
+                        <li>목표: "무엇을 봤는지" 뿐만 아니라, "그래서 무엇을 해야 하는지"에 대한 결론과 행동 방안을 제시합니다.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h5 class="fw-bold mt-4 mb-2">
+                <i class="bi bi-gear"></i>&nbsp; 핵심 기법 및 도구</h5>
+            <div class="table-responsive">
+                <table class="table table-bordered tech-table">
+                    <thead>
+                        <tr>
+                            <th>기법/영역</th>
+                            <th>상세 내용</th>
+                            <th>핵심 도구/라이브러리</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>탐색적 분석</td>
+                            <td>기술 통계량 요약, 다중 변수 분포 시각화, 피어슨 상관 계수</td>
+                            <td>Pandas `.describe()`, Seaborn `.heatmap()`</td>
+                        </tr>
+                        <tr>
+                            <td>통계 시각화</td>
+                            <td>히스토그램, 박스 플롯, 바이올린 플롯, Pair Plot</td>
+                            <td>Seaborn, Matplotlib</td>
+                        </tr>
+                        <tr>
+                            <td>인터랙티브 시각화</td>
+                            <td>웹 기반 대화형 차트, 대시보드 제작</td>
+                            <td>Plotly, Bokeh, Folium (지리 시각화)</td>
+                        </tr>
+                        <tr>
+                            <td>BI 도구</td>
+                            <td>데이터 연결, KPI 시각화, 드릴다운(Drill-down) 기능 구현</td>
+                            <td>Tableau, Power BI, Google Data Studio</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!--4번-->
+        <div class="step-section shadow p-4 mb-5" id="d">
+            <h3 class="step-header fs-4">
+                <i class="bi bi-4-circle-fill text-b"></i>머신러닝 및 모델링 (Machine Learning)
+            </h3>
+            <p class="text-secondary">
+                데이터를 기반으로 미래를 예측하거나 패턴을 식별하는 핵심 알고리즘을 학습하고, 실제 문제 해결을 위한 모델 구축, 평가 및 최적화 능력을 배양합니다.
+            </p>
+
+            <div class="step-detail">
+                <h5 class="fw-bold mb-4"> 목표: 데이터로부터 학습하여 정확한 예측 및 패턴 식별 모델 구축</h5>
+
+                <div class="sub-title">핵심 머신러닝 알고리즘</div>
+                <ul>
+                    <li>지도 학습 (Supervised): 로지스틱 회귀 (이진 분류), 선형 회귀 (연속 값 예측)</li>
+                    <li>분류 알고리즘: 결정 트리, 랜덤 포레스트 (앙상블), 서포트 벡터 머신 (SVM)의 원리 이해 및 적용</li>
+                    <li>비지도 학습 (Unsupervised): K-Means/DBSCAN (군집화), PCA (주성분 분석을 통한 차원 축소)</li>
+                </ul>
+
+                <div class="sub-title">모델 평가 및 최적화</div>
+                <ul>
+                    <li>모델 훈련/테스트: 학습 데이터와 테스트 데이터 분리, 과적합/과소적합 방지 전략 (규제 L1, L2)</li>
+                    <li>평가 지표: Confusion Matrix (혼동 행렬), ROC-AUC 커브, 정밀도/재현율 트레이드오프 이해</li>
+                    <li><span class="text-decoration-underline">앙상블 기법</span>: 배깅(Bagging), 부스팅(Boosting)의 차이 이해 및 XGBoost, LightGBM 등 실전 도구 활용</li>
+                    <li>주요 도구: Scikit-learn의 모든 모듈 (Preprocessing, Model, Evaluation) 숙련</li>
+                </ul>
+            </div>
+
+            <button class="btn concept-button w-100" type="button" data-bs-toggle="collapse" data-bs-target="#conceptFour" aria-expanded="false" aria-controls="conceptFour">
+                <i class="bi bi-caret-down-fill me-2"></i> 앙상블 기법-? (Ensemble Methods)
+            </button>
+            <div class="collapse" id="conceptFour">
+                <div class="concept-collapse-body">
+                    <p class="fw-bold">
+                        <i class="bi bi-graph-up text-info me-2"></i> 앙상블 기법 (Ensemble Methods) 
+                    </p>
+                    <p>
+                        앙상블 기법은 여러 개의 약한 학습기(Weak Learners)를 결합하여 하나의 강력한 예측 모델을 만드는 방법입니다. 단일 모델보다 훨씬 높은 정확도와 안정성을 제공하여 실무에서 광범위하게 사용됩니다.
+                    </p>
+                    <ul class="mb-0">
+                        <li>배깅(Bagging, 예: 랜덤 포레스트): 독립적인 다수 모델을 학습시킨 후 결과를 평균/투표하여 최종 예측을 수행. 과적합 방지에 효과적</li>
+                        <li>부스팅(Boosting, 예: <span class="text-decoration-underline">XGBoost</span>): 이전 모델의 오류를 다음 모델이 보완하며 순차적으로 학습. 일반적으로 가장 높은 예측 성능을 보입니다.</li>
+                    </ul>
+                    <p><br><i class="bi bi-diagram-3"></i>&nbsp;
+                        XG Boost (Extreme Gradient Boosting):
+                        <br>: 대용량 분산 처리를 위한 그래디언트 부스팅으로 의사결정나무에 Boosting기법을 적용한 Ensemble 알고리즘
+                    </p>
+                </div>
+            </div>
+            
+            <h5 class="fw-bold  mt-4 mb-3">
+                <i class="bi bi-gear"></i>&nbsp; 핵심 기법 및 도구</h5>
+            <div class="table-responsive">
+                <table class="table table-bordered tech-table">
+                    <thead>
+                        <tr>
+                            <th>기법/영역</th>
+                            <th>알고리즘 예시</th>
+                            <th>핵심 도구/라이브러리</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>지도 학습</td>
+                            <td>선형/로지스틱 회귀, k-NN, SVM, Naive Bayes</td>
+                            <td>Scikit-learn, Statsmodels</td>
+                        </tr>
+                        <tr>
+                            <td>앙상블</td>
+                            <td>Random Fores, Gradient Boosting (GBM), Stacking</td>
+                            <td>XGBoost, LightGBM, CatBoost</td>
+                        </tr>
+                        <tr>
+                            <td>비지도 학습</td>
+                            <td>K-Means, DBSCAN, 계층적 군집, PCA</td>
+                            <td>Scikit-learn (Clustering/Decomposition)</td>
+                        </tr>
+                        <tr>
+                            <td>모델 최적화</td>
+                            <td>교차 검증 (K-Fold), 그리드/랜덤 서치, 정규화 (L1/L2)</td>
+                            <td>Scikit-learn Model Selection</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!--5번-->
+        <div class="step-section shadow p-4 mb-5" id="e">
+            <h3 class="step-header fs-4">
+                <i class="bi bi-5-circle-fill text-b"></i>딥러닝 및 실무 응용 (Deep Learning & Advanced Application)
+            </h3>
+            <p class="text-secondary">
+                이미지, 텍스트와 같은 비정형 데이터를 처리하고, 대규모 분석을 위한 빅데이터 플랫폼 및 실제 서비스 배포를 위한 운영 환경을 이해하여 실무 역량을 완성합니다.
+            </p>
+
+            <div class="step-detail">
+                <h5 class="fw-bold mb-4"> 목표: 비정형 데이터 처리, 대규모 분석 환경 및 실무 적용 능력 강화</h5>
+
+                <div class="sub-title">심층 신경망 (Deep Learning)</div>
+                <ul>
+                    <li>프레임워크: TensorFlow 또는 PyTorch를 이용한 모델 정의 및 훈련 과정 이해</li>
+                    <li>컴퓨터 비전 (CV): CNN (Convolutional Neural Network)을 활용한 이미지 인식, 전이 학습(Transfer Learning) 기법</li>
+                    <li>자연어 처리 (NLP): 임베딩(Embedding) 개념, RNN/LSTM을 통한 시퀀스 분석, <span class="text-decoration-underline">Transformer 아키텍처</span> 기초</li>
+                    <li>생성 모델: GAN(Generative Adversarial Network), VAE 등 생성형 AI 기본 개념</li>
+                </ul>
+
+                <div class="sub-title">빅데이터 기술 및 실무 역량</div>
+                <ul>
+                    <li>빅데이터 플랫폼: 분산 처리 시스템 Hadoop 및 인메모리 처리 프레임워크 Spark를 활용한 대용량 데이터 처리 파이프라인 구축</li>
+                    <li>클라우드: AWS SageMaker, Azure ML, GCP AI Platform 등 클라우드 기반에서 모델 개발, 배포, 모니터링 실습</li>
+                    <li>MLeOps 기초: 개발된 모델을 실제 서비스에 통합(Integration)하고 운영(Deployment)하는 프로세스 이해</li>
+                    <li>실무 프로젝트: 전 과정 (데이터 수집-정제-모델링-배포)을 포괄하는 End-to-End 프로젝트 수행 및 문서화</li>
+                </ul>
+            </div>
+            
+            <button class="btn concept-button w-100" type="button" data-bs-toggle="collapse" data-bs-target="#conceptFive" aria-expanded="false" aria-controls="conceptFive">
+                <i class="bi bi-caret-down-fill me-2"></i> Transformer 아키텍처-?
+            </button>
+            <div class="collapse" id="conceptFive">
+                <div class="concept-collapse-body">
+                    <p class="fw-bold">
+                        <i class="bi bi-lightning-fill text-info me-2"></i> Transformer 아키텍처
+                    </p>
+                    <p>
+                        Transformer는 2017년 Google에서 제안한 모델 구조로, 기존 NLP의 RNN/LSTM을 대체하며 현재 GPT, BERT 등 대형 언어 모델(LLM)의 근간이 되었습니다.
+                    </p>
+                    <ul class="mb-0">
+                        <li>핵심: Attention(어텐션) 메커니즘만으로 인코더와 디코더를 구성하여 시퀀스 데이터를 병렬 처리할 수 있게 합니다.</li>
+                        <li>장점: RNN의 순차적 처리 한계를 극복하여 학습 속도가 빠르고 장기 의존성 문제를 해결하여 성능이 혁신적으로 향상되었습니다.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h5 class="fw-bold mt-4 mb-3">
+                <i class="bi bi-gear"></i>&nbsp; 핵심 기법 및 도구</h5>
+            <div class="table-responsive">
+                <table class="table table-bordered tech-table">
+                    <thead>
+                        <tr>
+                            <th>기법/영역</th>
+                            <th>알고리즘/개념 예시</th>
+                            <th>핵심 도구/라이브러리</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>딥러닝</td>
+                            <td>CNN (ResNet, VGG), RNN/LSTM, Attention 메커니즘</td>
+                            <td>TensorFlow, PyTorch, Keras</td>
+                        </tr>
+                        <tr>
+                            <td>빅데이터 처리</td>
+                            <td>MapReduce, 분산 컴퓨팅, RDD, DataFrame</td>
+                            <td>Apache Hadoop, Apache Spark</td>
+                        </tr>
+                        <tr>
+                            <td>특화 응용</td>
+                            <td>Word2Vec, BERT, 시계열 분석(ARIMA, Prophet)</td>
+                            <td>NLTK, spaCy, Gensim, Prophet</td>
+                        </tr>
+                        <tr>
+                            <td>실무 배포</td>
+                            <td>모델 서빙, API 구축, 컨테이너화</td>
+                            <td>Docker, Kubernetes, Flask/FastAPI</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </div>
+        </div>
+    </div>
+
+    <footer class="bg-light text-dark py-5 border-top">
+        <div class="container text-center">
+             <hr>
+            <div class="text-center text-secondary mt-4 mb-2">
+                <p class="mb-1 small">
+                    01797 서울시 노원구 화랑로 621 데이터사이언스학과 | TEL. (02) 123-4567 | FAX. (02) 123-4568
+                </p>
+            </div>
+
+            <div class="text-center text-secondary">
+                <p class="mb-0 small">Copyright 2025 Data Science Guide. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <button onclick="topFunction()" id="scroll-to-top" class="btn btn-primary">
+        <i class="bi bi-arrow-up-short fs-4"></i>
+    </button>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <script>
+        // Get the button
+        let mybutton = document.getElementById("scroll-to-top");
+
+        // When the user scrolls down 100px from the top of the document, show the button
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+          if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+            mybutton.style.display = "block";
+          } else {
+            mybutton.style.display = "none";
+          }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+          document.body.scrollTop = 0; // For Safari
+          document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
+    </script>
+</body>
+</html>

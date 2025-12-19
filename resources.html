@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>학습 자원 및 플랫폼 - DS Guide</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gaegu&family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    
+    <style>
+        /*폰트*/
+    
+        *{
+            font-family: "Noto Sans KR", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400; 
+            font-style: normal;
+        }
+        .fw-bold { font-weight: 700 !important; }
+        .fw-bolder { font-weight: 900 !important; }
+        .fw-light { font-weight: 300 !important; }
+
+        .gaegu-regular {
+            font-family: "Gaegu", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        /* 메인 헤더 (사용자 요청 반영) */
+        .main-header {
+            /* 배경 이미지 URL을 실제 이미지 경로로 변경해야 합니다. 임시로 'background_image.jpg'를 사용했습니다. */
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('img/img(1).jpg'); 
+            background-size: cover; 
+            background-position: center;
+            color: white;
+            min-height: 400px;
+            padding: 100px 0; 
+            display: flex; 
+        }
+        .main-header h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: white;
+            margin-top: 20px;
+        }
+        .main-header p {
+            font-size: 1.1rem;
+            color: #ccc;
+            margin-top: 20px;
+        }
+        .main-header .divider {
+            width: 50px;
+            height: 3px;
+            background-color: white;
+            margin: 50px auto 0;
+        }
+
+
+        /* 1. 커스텀 색상 및 강조 컬러 정의 (index.html과 동일) */
+        :root {
+            --bs-primary: #002d61; /* 진한 파랑 */
+            --bs-a: rgb(82, 110, 146) ;
+            --bs-b: rgb(95, 141, 196) ;
+            --bs-background: #f8f9fa; /* 흰색 배경 */
+            --bs-card-bg: #f8f9fa; /* 섹션 배경 (아주 밝은 회색) */
+            --bs-text: #333333; /* 어두운 텍스트 */
+            --bs-secondary-text: #6c757d; /* 보조 텍스트 */
+            --bs-border: #dee2e6; /* 경계선 */
+
+            /* 단계별 강조 색상 */
+            --step-1-color: #315a77;
+            --step-2-color: #5ca7b8;
+            --step-3-color: #1b5fac;
+            --step-4-color: #6392c7;
+            --step-5-color: #92b1d3;
+        }
+        body {
+            background-color: var(--bs-background);
+            color: var(--bs-text);
+        }
+        .text-primary { color: var(--bs-primary) !important; }
+        .text-a { color: var(--bs-a) !important; }
+        .text-b { color: var(--bs-b) !important; }
+        .bg-primary { background-color: var(--bs-primary) !important; }
+        .text-secondary { color: var(--bs-secondary-text) !important; }
+        
+
+        /* 2. 섹션 간 간격 확대 */
+        section {
+            padding-top: 5rem; 
+            padding-bottom: 5rem;
+        }
+
+        /* 3. Navigation Active 스타일 */
+        .navbar-nav .nav-item .nav-link:not(.active) {
+            color: rgba(0, 0, 0, 0.6) !important;
+        }
+        .navbar-nav .nav-item .nav-link.active {
+            color: var(--bs-primary) !important;
+            font-weight: bold;
+        }
+        
+        /* 리소스 박스 스타일 */
+        .resource-box {
+            transition: transform 0.3s ease-in-out;
+            border-radius: 0.75rem;
+            border: 1px solid rgba(0, 0, 0, 0.1) ;
+        }
+
+        .resource-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background-color: #f0f0f0 !important;
+        }
+
+        .resource-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .resource-box1 {
+            transition: transform 0.3s ease-in-out;
+            border-radius: 0rem;
+            border: 1px solid rgb(222, 222, 222) ;
+        }
+
+        /* 💡 4. 맨 위로 버튼 스타일 추가 */
+        #scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none; /* 기본적으로 숨김 */
+            z-index: 999;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+        #scroll-to-top:hover {
+            background-color: var(--bs-primary);
+            filter: brightness(1.2);
+        }
+
+        .container-xl {
+            max-width: 1100px !important; /* 컨텐츠 영역을 1200px로 제한하여 양쪽에 여백 확보 */
+        }
+
+        .detail-button:hover {
+        background-color: #f0f0f0;
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+        <div class="container-fluid container">
+            <a class="gaegu-regular navbar-brand fw-bold text-primary" href="index.html">
+                <img src="img/logo.jpg" alt="Logo" height="24" class="d-inline-block align-text-top me-2"> 
+                Data Science
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link fw-normal" href="index.html">HOME</a></li>
+                    <li class="nav-item"><a class="nav-link fw-normal" href="definition.html">정의</a></li> 
+                    <li class="nav-item"><a class="nav-link fw-normal" href="learning.html">학습내용</a></li>
+                    <li class="nav-item"><a class="nav-link fw-normal" href="career.html">역량/진로</a></li>
+                    <li class="nav-item"><a class="nav-link fw-normal" href="cases.html">활용사례</a></li>
+                    <li class="nav-item"><a class="nav-link active fw-normal" href="resources.html">학습자원/플랫폼</a></li> 
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="main-header text-center">
+        <div class="container">
+            <h1 class="mb-3">어디서 자료/도움을 얻을 수 있을까?</h1>
+            <p class="lead text-white-50 mb-0">
+                데이터사이언스 관련 플랫폼에 대해 알아봅시다!
+            </p>
+            <div class="divider"></div>
+        </div>
+    </header>
+
+    <section>
+        <div class="container-xl">
+            <h1 class="display-5 text-center mb-6 fw-bold fs-2">
+                학습 자원 플랫폼
+            </h1>
+            <p class="lead text-center text-secondary mb-5 mt-3">
+                수업 외 자율 학습을 위한 필수 온라인 플랫폼과 개발 환경을 안내합니다.
+            </p>
+
+            <h2 class="fw-bold text-dark mb-4 border-bottom pb-3 fs-3">
+                <i class="bi bi-globe me-2 text-a"></i> 온라인 학습 플랫폼
+            </h2>
+            <div class="row g-4 mb-5">
+                
+                <div class="col-md-6 col-lg-4">
+                    <a href="https://www.kaggle.com" target="_blank" class="text-decoration-none text-dark">
+                        <div class="card p-4 h-100 resource-box shadow-sm">
+                            <i class="bi bi-trophy-fill resource-icon text-a"></i>
+                            <h5 class="fw-bold">Kaggle (캐글)</h5>
+                            <p class="small mb-0">
+                                전 세계 데이터 과학자들이 참여하는 데이터 분석 및 머신러닝 경진대회 플랫폼. 실전 데이터를 다루고 다른 사람의 코드를 학습할 수 있는 최고의 환경입니다.
+                            </p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <a href="https://www.coursera.org" target="_blank" class="text-decoration-none text-dark">
+                        <div class="card p-4 h-100 resource-box shadow-sm">
+                            <i class="bi bi-file-earmark-code-fill resource-icon text-b"></i>
+                            <h5 class="fw-bold">Coursera / edX</h5>
+                            <p class="small mb-0">
+                                세계 유수 대학 및 기업의 데이터사이언스 MOOC (온라인 공개 강좌)를 수강할 수 있는 플랫폼. 부족한 이론이나 특정 기술을 보완하는 데 유용합니다.
+                            </p>
+                        </div>
+                    </a>
+                </div>
+                
+                
+                <div class="col-md-6 col-lg-4 mt-3">
+                    <a href="https://github.com" target="_blank" class="text-decoration-none text-dark">
+                        <div class="card p-4 h-100 resource-box shadow-sm">
+                            <i class="bi bi-github resource-icon text-secondary"></i>
+                            <h5 class="fw-bold">GitHub (깃허브)</h5>
+                            <p class="small mb-0">
+                                버전 관리 시스템의 필수 도구. 모든 코드 프로젝트를 체계적으로 관리하고, 포트폴리오로 활용할 수 있습니다. 1학년 때부터 사용에 익숙해져야 합니다.
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <h2 class="fw-bold text-dark mb-4 border-bottom pb-2 mt-5 fs-3">
+                <i class="bi bi-laptop me-2 text-primary"></i> 주요 개발 환경 (IDE)
+            </h2>
+            <div class="row g-4 mb-6">
+                
+                 <div class="col-md-6">
+                    <a href="https://jupyter.org/" target="_blank" class="text-decoration-none text-dark">
+                    <div class="card p-4 h-100 resource-box shadow-sm detail-button">
+                        <h5 class="fw-bold text-dark mb-3"><i class="bi bi-terminal me-2 text-b "></i> 주피터 노트북 (Jupyter Notebook)</h5>
+                        <p class="mb-0">
+                            웹 브라우저 기반의 대화형 컴퓨팅 환경으로, 코드, 실행 결과, 설명 텍스트, 시각화를 하나의 문서(.ipynb)에 결합하여 작성하고 공유할 수 있게 해줍니다.
+                        </p>
+                        <br>
+                        <p class="small mb-0">
+                            셀(Cell) 단위 실행이 가능하여 데이터 분석 과정이나 실험적인 코드를 순서대로 기록하고 결과를 즉시 확인할 때 가장 효과적입니다.
+                        </p>
+                    </div>
+                    </a>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card p-4 h-100 resource-box shadow-sm detail-button">
+                        <a href="https://colab.research.google.com/" target="_blank" class="text-decoration-none text-dark">
+                        <h5 class="fw-bold text-dark mb-3"><i class="bi bi-code-slash me-2 text-warning"></i> 구글 코랩 (Google Colab, Colaboratory)</h5>
+                        <p class="mb-0">
+                            주피터 노트북 환경을 Google 클라우드에서 제공하는 서비스입니다.
+                        </p>
+                        <br>
+                        <p class="small mb-0">
+                            별도의 설치나 환경 설정 없이 무료로 고성능 GPU/TPU 자원을 사용할 수 있습니다. Google Drive와 연동되어 코드와 데이터를 쉽게 공유할 수 있습니다.
+                        </p>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card p-4 h-100 resource-box shadow-sm detail-button">
+                        <a href="https://www.jetbrains.com/pycharm/" target="_blank" class="text-decoration-none text-dark">
+                        <h5 class="fw-bold text-dark mb-3"><i class="bi bi-file-earmark-code me-2"></i> 파이참 (PyCharm)</h5>
+                        <p class="mb-0">
+                            JetBrains에서 개발한 Python 전문 통합 개발 환경 (IDE)입니다.
+                        </p>
+                        <br>
+                        <p class="small mb-0">
+                            강력한 코드 자동 완성, 리팩토링, 디버깅 기능 등 소프트웨어 개발에 필요한 모든 전문적인 기능을 제공합니다.
+                        </p>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card p-4 h-100 resource-box shadow-sm detail-button">
+                        <a href="https://code.visualstudio.com/" target="_blank" class="text-decoration-none text-dark">
+                        <h5 class="fw-bold text-dark mb-3"><i class="bi bi-filetype-py me-2 text-success"></i> VS 코드 (Visual Studio Code, VS Code)</h5>
+                        <p class="mb-0">
+                            Microsoft에서 개발한 무료 오픈소스 코드 편집기입니다.
+                        </p>
+                        <br>
+                        <p class="small mb-0">
+                            가볍고 빠르면서도 확장 기능(Extension)을 통해 다양한 언어(Python, R, JavaScript 등)와 개발 환경을 지원합니다.
+                        </p>
+                        </a>
+                    </div>
+                </div>
+                
+            </div>
+
+
+        </div>
+    </section>
+
+    <hr>
+    <section class="bg-light" id="target-section">
+    <div class="container-xl">
+        
+        <h2 class="fw-bolder text-dark mb-1 border-bottom pb-2">
+             <div class="d-flex align-items-center"> 
+                 <p class="fw-bold fs-3">
+                    <i class="bi bi-person-workspace me-2 text-primary fs-3"></i>
+                    주요 협력 및 산학 연계</p>
+             </div>
+        </h2>
+        
+        <p class="lead text-secondary mb-5 mt-4 fs-6 fw-normal"> 
+            데이터사이언스 학과는 기업, 공공기관 및 연구소와의 활발한 협력을 통해 학생들에게 실질적인 경험과 폭넓은 진로 기회를 제공합니다. 
+            <br>(산학협력 분야: AI/플랫폼, 핀테크, 스마트 팩토리, 헬스케어)
+        </p>
+
+    <div class="container-xl">
+        <div class="row g-4 mb-5">
+
+            <div class="col-md-6">
+                <a href="https://www.kdata.or.kr/" target="_blank" class="text-decoration-none text-dark">
+                <div class="card p-4 h-100 resource-box shadow-sm bg-white">
+                    <h5 class="fw-bold text-dark mb-3">         
+                    <img src="img/한국데이터산업진흥원.png" alt="한국데이터산업진흥원" style="height: 80px; opacity: 0.8;" class="resource-box1">
+                        &nbsp; &nbsp; 한국데이터산업진흥원
+                    </h5>
+                    <p class="mb-0">
+                        데이터 산업 인력 양성 및 데이터 활용 프로젝트 협력
+                    </p>
+                    <br>
+                    <p class="small mb-0 text-secondary">
+                        데이터 바우처 사업, 데이터 품질 관리 등 실제 데이터 유통 및 활용 프로젝트에 참여하여 실무 역량을 키웁니다.
+                    </p>
+                </div>
+                </a>
+            </div>
+
+            <div class="col-md-6">
+                <a href="https://www.khidi.or.kr/kps" target="_blank" class="text-decoration-none text-dark">
+                <div class="card p-4 h-100 resource-box shadow-sm bg-white">
+                    <h5 class="fw-bold text-dark mb-3">         
+                    <img src="img/한국보건산업진흥원.png" alt="한국보건산업진흥원" style="height: 70px; opacity: 0.8;" class="resource-box1">
+                        &nbsp; &nbsp; 한국보건산업진흥원
+                    </h5>
+                    <p class="mb-0">
+                        보건 의료 빅데이터 분석 및 인공지능 기반 의료 기술 연구
+                    </p>
+                    <br>
+                    <p class="small mb-0 text-secondary">
+                         보건 산업 R&D 및 의료기관 디지털 전환 프로젝트에 참여하여 헬스케어 분야의 데이터 분석 전문가로 성장합니다.
+                    </p>
+                </div>
+                </a>
+            </div>
+
+
+            <div class="col-md-6 col-lg-4">
+                <a href="https://www.fsec.or.kr/" target="_blank" class="text-decoration-none text-dark">
+                <div class="card p-4 h-100 resource-box shadow-sm bg-white">
+                    <h5 class="fw-bold text-dark mb-3">         
+                    <img src="img/금융보안원.jpeg" alt="금융보안원" style="height: 80px; opacity: 0.8;" class="resource-box1">
+                        <br><br> 금융보안원
+                    </h5>
+                    <p class="mb-0">
+                        금융 IT 보안 및 디지털 금융 기술 공동 연구
+                    </p>
+                    <br>
+                    <p class="small mb-0 text-secondary">
+                        금융권의 정보 보호, 사이버 침해 대응 분석 및 핀테크 보안 기술 개발 프로젝트에 참여하여 전문성을 강화합니다.
+                    </p>
+                </div>
+                </a>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <a href="https://winwin.naver.com/" target="_blank" class="text-decoration-none text-dark">
+                <div class="card p-4 h-100 resource-box shadow-sm bg-white">
+                    <h5 class="fw-bold text-dark mb-3">         
+                    <img src="img/네이버.jpeg" alt="네이버" style="height: 80px; opacity: 0.8;" class="resource-box1">
+                        <br><br> 네이버 동반 성장
+                    </h5>
+                    <p class="mb-0">
+                        인공지능(AI) 기술 개발과 대규모 데이터 플랫폼 구축
+                    </p>
+                    <br>
+                    <p class="small mb-0 text-secondary">
+                        이 협력을 통해 최첨단 딥러닝 모델 설계부터 서비스에 실제로 적용되는 대규모 데이터 처리 시스템까지, 실무 프로젝트를 통해 폭넓은 경험을 쌓을 수 있습니다.
+                    </p>
+                </div>
+                </a>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <a href="https://www.msit.go.kr/index.do" target="_blank" class="text-decoration-none text-dark">
+                <div class="card p-4 h-100 resource-box shadow-sm bg-white">
+                    <h5 class="fw-bold text-dark mb-3">         
+                    <img src="img/과학기술정보통신부.png" alt="과학기술정보통신부" style="height: 60px; opacity: 0.8;" class="resource-box1 mb-3">
+                        <br><br> 과학기술정보통신부
+                    </h5>
+                    <p class="mb-0">
+                        국가 ICT 인재 양성 사업 및 첨단 기술 개발 과제 수행
+                    </p>
+                    <br>
+                    <p class="small mb-0 text-secondary">
+                        정부 주도의 AI, 5G 등 최신 과학기술 정책 및 R&D 프로젝트에 참여하여 미래 기술 역량을 확보합니다.
+                    </p>
+                </div>
+                </a>
+            </div>
+            
+        </div>
+
+    </div>
+</section>
+
+    <div>
+        <p class="bg-white"></p>
+    </div>
+    <footer class="bg-light text-dark py-5 border-top">
+        <div class="container text-center">
+             <hr>
+            <div class="text-center text-secondary mt-4 mb-2">
+                <p class="mb-1 small">
+                    01797 서울시 노원구 화랑로 621 데이터사이언스학과 | TEL. (02) 123-4567 | FAX. (02) 123-4568
+                </p>
+            </div>
+
+            <div class="text-center text-secondary">
+                <p class="mb-0 small">Copyright 2025 Data Science Guide. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <button onclick="topFunction()" id="scroll-to-top" class="btn btn-primary">
+        <i class="bi bi-arrow-up-short fs-4"></i>
+    </button>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <script>
+        // Get the button
+        let mybutton = document.getElementById("scroll-to-top");
+
+        // When the user scrolls down 100px from the top of the document, show the button
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+          if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+            mybutton.style.display = "block";
+          } else {
+            mybutton.style.display = "none";
+          }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+          document.body.scrollTop = 0; // For Safari
+          document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
+    </script>
+</body>
+</html>

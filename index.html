@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>데이터사이언스 학과 가이드</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gaegu&family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bs-primary: #002d61; /* 메인 색상 */
+            --bs-success: #1b5fac; /* 성공/강조 색상을 메인 색상과 통일 */
+            --bs-light: #ffffff; /* 밝은 배경 색상 */
+            --bs-body-color: #333; /* 본문 텍스트 색상 */
+            --text-color-dark: #333; /* 카드 내부 텍스트 색상 */
+            --text-color-light: #ffffff; /* 어두운 배경 위 텍스트 색상 */
+        }
+/*폰트*/
+        .gaegu-regular {
+            font-family: "Gaegu", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        
+*{
+  font-family: "Noto Sans KR", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
+}
+
+
+        /* 사용되는 색상 클래스 */
+        .text-primary { color: var(--bs-primary) !important; }
+        .bg-primary { background-color: var(--bs-primary) !important; }
+        .btn-primary { background-color: var(--bs-primary); border-color: var(--bs-primary); }
+        .btn-primary:hover { background-color: #1357a4; border-color: #246dbf; }
+
+        .text-success { color: var(--bs-success) !important; }
+        .bg-success { background-color: var(--bs-success) !important; }
+
+        section {
+            padding-top: 3rem; 
+            padding-bottom: 3rem; 
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('img/img(1).jpg'); 
+            background-size: cover;
+            background-position: center;
+            color: rgb(255, 255, 255); 
+            padding: 100px 0;
+            min-height: 400px; 
+            display: flex;
+            align-items: center; 
+        }
+
+        .hero-content {
+            z-index: 10; 
+        }
+
+        /* ⭐️ 핵심 가이드 카드 스타일 수정 ⭐️ */
+        .custom-card { 
+            border: none; 
+            overflow: hidden; 
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); 
+            min-height: 150px; 
+            position: relative; 
+            
+            opacity: 0.8;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .custom-card:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2); 
+            opacity: 1.0; 
+        }
+
+        /* 배경 이미지 위에 어두운 오버레이 추가 */
+        .custom-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(131, 131, 131, 0.7); 
+            z-index: 1;
+        }
+
+        /* ⭐️ 이미지 배경 지정 ⭐️ */
+        .card-image-1 {
+             background-image: url('img/img(5).png'); 
+        }
+
+        .card-image-2 {
+             background-image: url('img/img(2).jpg'); 
+        }
+        .card-image-3 {
+             background-image: url('img/img(3).jpeg'); 
+        }
+        .card-image-4 {
+             background-image: url('img/img(4).png'); 
+        }
+        
+        /* 카드 내용 스타일 (가로/세로 정중앙 배치) */
+        .card-body-custom { 
+            display: flex; 
+            flex-direction: column; 
+            /* ⭐️ 재수정: 수직 및 수평 중앙 정렬 ⭐️ */
+            justify-content: center; 
+            align-items: center; 
+            padding: 1rem; 
+            height: 100%; 
+            position: relative; 
+            z-index: 2; 
+            color: var(--text-color-light); 
+            text-align: center;
+        }
+
+        .card-text-custom { 
+            font-size: 1.25rem; 
+             
+            line-height: 1.3; 
+            color: var(--text-color-light); 
+            /* ⭐️ 최종 수정: 텍스트 아래에 간격만 추가하고 불필요한 마진 제거 ⭐️ */
+            margin-bottom: 1rem; 
+            margin-top: 20px;
+        }
+
+        /* 아이콘 배지 스타일 */
+        .card-body-custom .badge { 
+            background-color: var(--bs-primary) !important; 
+            color: rgb(231, 231, 231);
+            margin: 0; /* 마진 완전히 제거 */
+        }
+        
+        /* Offcanvas 스타일은 기존과 동일 */
+        .offcanvas.offcanvas-start {
+            background-color: rgb(255, 255, 255) !important;
+            color: var(--bs-body-color) !important;
+            width: 280px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+        }
+
+        /* 네비게이션바 밝은 모드 */
+        .navbar-nav .nav-item .nav-link:not(.active) {
+            color: rgba(0, 0, 0, 0.6) !important;
+            
+        }
+        .navbar-nav .nav-item .nav-link.active {
+            color: var(--bs-primary) !important;
+            font-weight: bold;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+        <div class="container-fluid container">
+            <a class="navbar-brand fw-bold text-primary gaegu-regular" href="index.html">
+                <img src="img/logo.jpg" alt="Logo" height="24" class="d-inline-block align-text-top me-2"> 
+                Data Science
+            </a>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active fw-normal" aria-current="page" href="index.html">HOME</a></li>
+                    <li class="nav-item"><a class="nav-link fw-normal" href="definition.html">정의</a></li> 
+                    <li class="nav-item"><a class="nav-link fw-normal" href="learning.html">학습내용</a></li>
+                    <li class="nav-item"><a class="nav-link fw-normal" href="career.html">역량/진로</a></li>
+                    <li class="nav-item"><a class="nav-link fw-normal" href="cases.html">활용사례</a></li>
+                    <li class="nav-item"><a class="nav-link fw-normal" href="resources.html">학습자원/플랫폼</a></li>
+                </ul>
+            </div>
+
+            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title fw-bold" id="offcanvasNavbarLabel">
+                <img src="img/logo.jpg" alt="logo" height="28" class="d-inline-block align-text-top me-2"> 
+                Data Science
+            </h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item"><a class="nav-link active fw-normal" aria-current="page" href="index.html">HOME</a></li>
+                <li class="nav-item"><a class="nav-link fw-normal" href="definition.html">정의</a></li>
+                <li class="nav-item"><a class="nav-link fw-normal" href="learning.html">핵심 학습 내용</a></li>
+                <li class="nav-item"><a class="nav-link fw-normal" href="career.html">역량 및 진로</a></li>
+                <li class="nav-item"><a class="nav-link fw-normal" href="cases.html">활용 사례</a></li>
+                <li class="nav-item"><a class="nav-link fw-normal" href="resources.html">학습자원 및 플랫폼</a></li>
+            </ul>
+            <hr class="text-secondary mt-5">
+            <form class="d-flex mt-3" role="search">
+                <input class="form-control me-2" type="search" placeholder="검색" aria-label="Search">
+                <button class="btn btn-outline-light" type="submit"><i class="bi bi-search"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <header class="hero-section text-center">
+        <div class="container hero-content">
+            <h1 class="display-6 fw-semibold text-white mb-4">
+                데이터사이언스란 무엇일까?
+            </h1>
+            <p class="lead text-white-50">
+                데이터의 가치에 통찰력(Insight)을 더해, 새로운 산업을 이끌어갈 <span class="fw-medium">미래형 전문가</span>를 양성합니다.
+            </p>
+            
+            <a href="definition.html" class="btn btn-outline-secondary btn-lg mt-4 shadow-lg text-white fw-nomal">
+                <i class="bi bi-bar-chart-line"></i>ㅤ데이터사이언스 정의
+            </a>
+            
+            <div class="d-flex justify-content-center mt-5">
+                <div class="bg-white" style="width: 50px; height: 3px;"></div> 
+            </div>
+        </div>
+    </header>
+
+<section class="bg-light">
+    <div class="container">
+        <h3 class="text-center mb-5 fw-bold text-primary">핵심 가이드</h3> 
+        <div class="row g-4">
+            
+            <div class="col-6 col-md-3">
+                <a href="learning.html" class="text-decoration-none">
+                    <div class="card custom-card card-image-1">
+                        <div class="card-body-custom">
+                            <p class="card-text-custom fw-medium ">핵심 학습 내용</p>
+                            <span class="badge rounded-pill fs-5"><i class="bi bi-book"></i></span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="col-6 col-md-3">
+                <a href="career.html" class="text-decoration-none">
+                    <div class="card custom-card card-image-2"> 
+                        <div class="card-body-custom">
+                            <p class="card-text-custom fw-medium">역량 및 진로</p>
+                            <span class="badge rounded-pill fs-5"><i class="bi bi-person-workspace"></i></span> 
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="col-6 col-md-3">
+                <a href="cases.html" class="text-decoration-none">
+                       <div class="card custom-card card-image-3">
+                        <div class="card-body-custom">
+                            <p class="card-text-custom fw-medium">현업 활용 사례</p>
+                            <span class="badge rounded-pill fs-5"><i class="bi bi-lightbulb"></i></span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-6 col-md-3"> 
+                <a href="resources.html" class="text-decoration-none">
+                    <div class="card custom-card card-image-4"> 
+                        <div class="card-body-custom">
+                            <p class="card-text-custom fw-medium">학습 자원 및 플랫폼</p>
+                            <span class="badge rounded-pill fs-5"><i class="bi bi-scissors"></i></span> 
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+    <footer class="bg-light text-dark py-5 border-top">
+
+        <div class="row justify-content-center text-center mb-4">
+            <div class="col-6 col-md-auto mb-2"><a href="#" class="text-decoration-none text-dark">정보공시</a></div>
+            <div class="col-6 col-md-auto mb-2"><a href="#" class="text-decoration-none text-dark">교내기관 안내</a></div>
+            <div class="col-6 col-md-auto mb-2"><a href="#" class="text-decoration-none text-dark">학과 포털</a></div>
+            <div class="col-6 col-md-auto mb-2"><a href="#" class="text-decoration-none text-dark">개인정보처리방침</a></div>
+            <div class="col-6 col-md-auto mb-2"><a href="#" class="text-decoration-none text-dark">사이트맵</a></div>
+        </div>
+        
+        <hr>
+
+        <div class="text-center text-secondary mt-4 mb-2">
+            <p class="mb-1 small">
+                01797 서울시 노원구 화랑로 621 데이터사이언스학과 | TEL. (02) 123-4567 | FAX. (02) 123-4568
+            </p>
+        </div>
+
+        <div class="text-center text-secondary">
+            <p class="mb-0 small">Copyright 2025 Data Science Guide. All Rights Reserved.</p>
+        </div>
+    </div>
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    
+</body>
+</html>

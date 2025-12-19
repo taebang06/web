@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>활용 사례 - DS Guide</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gaegu&family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    
+    
+    <style>
+        /*폰트*/
+    
+        *{
+            font-family: "Noto Sans KR", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400; 
+            font-style: normal;
+        }
+        .fw-bold { font-weight: 700 !important; }
+        .fw-bolder { font-weight: 900 !important; }
+        .fw-light { font-weight: 300 !important; }
+
+        .gaegu-regular {
+            font-family: "Gaegu", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        /* 메인 헤더 (사용자 요청 반영) */
+        .main-header {
+            /* 배경 이미지 URL을 실제 이미지 경로로 변경해야 합니다. 임시로 'background_image.jpg'를 사용했습니다. */
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('img/img(1).jpg'); 
+            background-size: cover; 
+            background-position: center;
+            color: white;
+            min-height: 400px;
+            padding: 100px 0; 
+            display: flex; 
+        }
+        .main-header h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: white;
+            margin-top: 20px;
+        }
+        .main-header p {
+            font-size: 1.1rem;
+            color: #ccc;
+            margin-top: 20px;
+        }
+        .main-header .divider {
+            width: 50px;
+            height: 3px;
+            background-color: white;
+            margin: 50px auto 0;
+        }
+
+
+        /* 1. 커스텀 색상 및 강조 컬러 정의 (index.html과 동일) */
+        :root {
+            --bs-primary: #002d61; /* 진한 파랑 */
+            
+            --bs-a: rgb(82, 110, 146) ;
+            --bs-b: rgb(77, 120, 176) ;
+            --bs-background: #ffffff; /* 흰색 배경 */
+            --bs-card-bg: #f8f9fa; /* 섹션 배경 (아주 밝은 회색) */
+            --bs-text: #333333; /* 어두운 텍스트 */
+            --bs-secondary-text: #6c757d; /* 보조 텍스트 */
+            --bs-border: #dee2e6; /* 경계선 */
+
+            /* 단계별 강조 색상 */
+            --step-1-color: #315a77;
+            --step-2-color: #5ca7b8;
+            --step-3-color: #1b5fac;
+            --step-4-color: #6392c7;
+            --step-5-color: #92b1d3;
+        }
+
+        
+        body {
+            background-color: var(--bs-background);
+            color: var(--bs-text);
+        }
+        .text-primary { color: var(--bs-primary) !important; }
+        .text-a { color: var(--bs-a) !important; }
+        .bg-primary { background-color: var(--bs-primary) !important; }
+        .text-secondary { color: var(--bs-secondary-text) !important; }
+        .btn-b { background-color: var(--bs-b) !important; }
+
+        /* 2. 섹션 간 간격 확대 */
+        section {
+            padding-top: 5rem; 
+            padding-bottom: 5rem;
+        }
+
+        /* 3. Navigation Active 스타일 */
+        .navbar-nav .nav-item .nav-link:not(.active) {
+            color: rgba(0, 0, 0, 0.6) !important;
+        }
+        .navbar-nav .nav-item .nav-link.active {
+            color: var(--bs-primary) !important;
+            font-weight: bold;
+        }
+        
+        /* 사례 카드 스타일 */
+        .case-card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            border-radius: 1rem;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.3);
+            /* 카드를 Flex 컨테이너로 설정하여 자식 요소의 높이 조절을 용이하게 함 */
+            display: flex;
+            flex-direction: column;
+        }
+        .case-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(74, 144, 226, 0.2);
+        }
+        .case-card img {
+            height: 200px; 
+            object-fit: cover;
+        }
+
+        /* ⭐️⭐️⭐️⭐️⭐️ 핵심 수정 1: 모든 카드 본문(body)에 최소 높이를 강제 지정 ⭐️⭐️⭐️⭐️⭐️ */
+        .case-card .card-body {
+            min-height: 250px; /* 이 값을 조정하여 카드의 최종 높이를 결정합니다. */
+            display: flex; /* 내용 정렬을 위해 Flex 사용 */
+            flex-direction: column;
+        }
+        /* ⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️ */
+        
+        .card-icon {
+            font-size: 2rem;
+            color: var(--bs-primary);
+        }
+        
+        /* 컨테이너 최대 너비 고정 */
+        .container-xl {
+            max-width: 1200px !important; 
+        }
+        
+        /* 💡 4. 맨 위로 버튼 스타일 추가 */
+        #scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none; /* 기본적으로 숨김 */
+            z-index: 999;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+        #scroll-to-top:hover {
+            background-color: var(--bs-primary);
+            filter: brightness(1.1);
+        }
+
+        .detail-button:hover {
+        background-color: #eaf1f4;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+        <div class="container-fluid container">
+            <a class="gaegu-regular navbar-brand fw-bold text-primary" href="index.html">
+                <img src="img/logo.jpg" alt="Logo" height="24" class="d-inline-block align-text-top me-2"> 
+                Data Science
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link fw-normal" href="index.html">HOME</a></li>
+                    <li class="nav-item"><a class="nav-link fw-normal" href="definition.html">정의</a></li>
+                    <li class="nav-item"><a class="nav-link fw-normal" href="learning.html">학습내용</a></li>
+                    <li class="nav-item"><a class="nav-link fw-normal" href="career.html">역량/진로</a></li>
+                    <li class="nav-item"><a class="nav-link active fw-normal" href="cases.html">활용사례</a></li> 
+                    <li class="nav-item"><a class="nav-link fw-normal" href="resources.html">학습자원/플랫폼</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="main-header text-center">
+        <div class="container">
+            <h1 class="mb-3">데이터사이언스는 어디서 사용될까?</h1>
+            <p class="lead text-white-50 mb-0">
+                데이터사이언스 활용 사례에 대해 알아봅시다!
+            </p>
+            <div class="divider"></div>
+        </div>
+    </header>
+
+    <section class="bg-light">
+        <div class="container-xl">
+            <h1 class="display-6 text-center mb-4 fw-bold fs-2">
+                활용 분야
+            </h1>
+            <p class="lead text-center text-secondary mb-5">
+                데이터사이언스는 어느 분야에서 사용될까?
+            </p>
+
+            <div class="row g-5">
+                
+                <div class="col-md-6 col-lg-4">
+                    <div class="card case-card shadow-lg detail-button">
+                        <img src="img/img(7).jpg " class="card-img-top" alt="금융 분야 이미지" style="opacity: 0.8">
+                        <div class="card-body p-4">
+                            <i class="bi bi-bank card-icon"></i>
+                            <h5 class="card-title fw-bold mt-3">금융 (Finance)</h5>
+                            <p>리스크 관리 및 부정 거래 탐지</p>
+                            <p class="card-text small text-secondary">
+                                머신러닝 모델을 사용하여 대출자의 신용 위험을 평가하고, 비정상적인 거래 패턴을 실시간으로 감지하여 금융 사기(Fraud)를 예방합니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="card case-card shadow-lg detail-button">
+                        <img src="img/img(8).jpg" class="card-img-top" alt="의료 분야 이미지" style="opacity: 0.8">
+                        <div class="card-body p-4">
+                            <i class="bi bi-activity card-icon" style="color: #bd608e !important;"></i>
+                            <h5 class="card-title fw-bold mt-3">의료 (Healthcare)</h5>
+                            <p>질병 예측 및 개인 맞춤 치료</p>
+                            <p class="card-text small text-secondary">
+                                유전체 데이터, 환자의 기록, 의료 영상 등을 분석하여 질병을 조기 진단하고, 환자 개개인에게 가장 효과적인 맞춤형 치료법을 추천합니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="card case-card shadow-lg detail-button">
+                        <img src="img/img(9).jpg" class="card-img-top" alt="제조 분야 이미지" style="opacity: 0.8">
+                        <div class="card-body p-4">
+                            <i class="bi bi-gear-wide card-icon" style="color: #6C757D !important;"></i>
+                            <h5 class="card-title fw-bold mt-3">제조 (Manufacturing)</h5>
+                            <p>설비 예측 정비 (Predictive Maintenance)</p>
+                            <p class="card-text small text-secondary">
+                                공장의 센서 데이터를 실시간으로 분석하여 기계의 고장 시점을 예측하고, 사전에 부품을 교체함으로써 생산 중단을 최소화하고 비용을 절감합니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="card case-card shadow-lg detail-button">
+                        <img src="img/img(10).jpg" class="card-img-top" alt="마케팅 분야 이미지" style="opacity: 0.8">
+                        <div class="card-body p-4">
+                            <i class="bi bi-cart-check card-icon" style="color: #7da085 !important;"></i>
+                            <h5 class="card-title fw-bold mt-3">마케팅 (Marketing)</h5>
+                            <p>고객 행동 예측 및 추천 시스템</p>
+                            <p class="card-text small text-secondary">
+                                고객의 구매 이력과 웹 활동을 분석하여 다음에 구매할 상품을 예측하고, 개인화된 추천 시스템을 제공하여 매출 증대에 기여합니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="card case-card shadow-lg detail-button">
+                        <img src="img/img(14).jpeg" class="card-img-top" alt="콘텐츠 및 생성형 AI 분야 이미지" style="opacity: 0.8">
+                        <div class="card-body p-4">
+                            <i class="bi bi-paragraph card-icon" style="color: #67b5c7 !important;"></i>
+                            <h5 class="card-title fw-bold mt-2">콘텐츠 및 생성형 AI</h5>
+                            <p>AI 기반 콘텐츠 생성 및 최적화</p>
+                            <p class="card-text small text-secondary">
+                                거대 언어 모델(LLM)을 사용하여 텍스트(챗봇), 이미지, 영상 등 새로운 디지털 콘텐츠를 생성하고, 타겟 고객에게 맞는 광고 문구를 자동으로 최적화합니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="card case-card shadow-lg detail-button">
+                        <img src="img/img(12).jpeg" class="card-img-top" alt="자율 시스템 및 비전 분야 이미지" style="opacity: 0.8">
+                        <div class="card-body p-4">
+                            <i class="bi bi-car-front card-icon" style="color: #8e78ae !important;"></i>
+                            <h5 class="card-title fw-bold mt-2">자율 시스템 및 비전</h5>
+                            <p>실시간 상황 인지 및 판단</p>
+                            <p class="card-text small text-secondary">
+                                자율 주행 차량이나 로봇에 탑재된 카메라, 라이다 센서 데이터를 분석하여 보행자, 신호등, 장애물 등을 실시간으로 인식하고 안전하게 주행 및 작업을 수행합니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="card case-card shadow-lg detail-button">
+                        <img src="img/img(13).jpeg" class="card-img-top" alt="IT/사이버 보안 분야 이미지" style="opacity: 0.8">
+                        <div class="card-body p-4">
+                            <i class="bi bi-fingerprint card-icon" style="color: #bd83a5 !important;"></i>
+                            <h5 class="card-title fw-bold mt-2">IT/사이버 보안</h5>
+                            <p>네트워크 이상 감지 및 위협 예측</p>
+                            <p class="card-text small text-secondary">
+                                서버 로그 및 네트워크 트래픽 데이터를 분석하여 성능 저하의 원인이나 시스템 오류를 예측하고, 새로운 해킹 시도 패턴을 탐지하여 사이버 위협에 선제적으로 방어합니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="card case-card shadow-lg detail-button">
+                        <img src="img/img(11).jpg" class="card-img-top" alt="공공 분야 이미지" style="opacity: 0.8">
+                        <div class="card-body p-4">
+                            <i class="bi bi-geo-alt card-icon" style="color: #7dc1ad !important;"></i>
+                            <h5 class="card-title fw-bold mt-2">공공 (Public Sector)</h5>
+                            <p>스마트 교통 및 범죄 예측</p>
+                            <p class="card-text small text-secondary">
+                                CCTV, 교통 센서 데이터를 분석하여 교통 흐름을 최적화하고, 특정 시간대와 지역의 데이터를 분석하여 범죄 발생 가능성을 예측합니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <section class="bg-light pt-5 pb-5"> 
+    <div class="container-xl">
+        
+        <div class="mt-5 ">
+            <div class="p-5 border bg-white rounded-4">
+                <div class="text-center ">
+                    <p class="lead fw-semibold text-dark mb-5">
+                        데이터사이언스는 다양한 분야에서 모두 활용될 수 있습니다.
+                    </p>
+                    <p class="fw-normal text-dark">
+                        위의 8개의 분야 외에도 다양한 분야로 진출할 수 있습니다.
+                        <br>자신이 관심있는 분야의 도메인 지식을 기른 후, 데이터사이언스 전문가가 됩시다!
+                    </p>
+                    
+                    <a href="career.html" class="btn btn-b btn-lg shadow-sm text-white mt-4">
+                        <i class="bi bi-arrow-right-circle me-2"></i> 전문가가 되려면? (필수역량)
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+    </section>
+        </div>
+    </section>
+
+    <footer class="bg-light text-dark py-5 border-top">
+        <div class="container text-center">
+            <hr>
+            <div class="text-center text-secondary mt-4 mb-2">
+                <p class="mb-1 small">
+                    01797 서울시 노원구 화랑로 621 데이터사이언스학과 | TEL. (02) 123-4567 | FAX. (02) 123-4568
+                </p>
+            </div>
+
+            <div class="text-center text-secondary">
+                <p class="mb-0 small">Copyright 2025 Data Science Guide. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <button onclick="topFunction()" id="scroll-to-top" class="btn btn-primary">
+        <i class="bi bi-arrow-up-short fs-4"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <script>
+        // Get the button
+        let mybutton = document.getElementById("scroll-to-top");
+
+        // When the user scrolls down 100px from the top of the document, show the button
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+          if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+            mybutton.style.display = "block";
+          } else {
+            mybutton.style.display = "none";
+          }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+          document.body.scrollTop = 0; // For Safari
+          document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>역량 및 진로 - DS Guide</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gaegu&family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    
+    <style>
+
+        /*폰트*/
+    
+        *{
+            font-family: "Noto Sans KR", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400; 
+            font-style: normal;
+        }
+        .fw-bold { font-weight: 700 !important; }
+        .fw-bolder { font-weight: 900 !important; }
+        .fw-light { font-weight: 300 !important; }
+
+        .gaegu-regular {
+            font-family: "Gaegu", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        /* 메인 헤더 (사용자 요청 반영) */
+        .main-header {
+            /* 배경 이미지 URL을 실제 이미지 경로로 변경해야 합니다. 임시로 'background_image.jpg'를 사용했습니다. */
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('img/img(1).jpg'); 
+            background-size: cover; 
+            background-position: center;
+            color: white;
+            min-height: 400px;
+            padding: 100px 0; 
+            display: flex; 
+        }
+        .main-header h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: white;
+            margin-top: 20px;
+        }
+        .main-header p {
+            font-size: 1.1rem;
+            color: #ccc;
+            margin-top: 20px;
+        }
+        .main-header .divider {
+            width: 50px;
+            height: 3px;
+            background-color: white;
+            margin: 50px auto 0;
+        }
+
+        
+        /* 1. 커스텀 색상 및 강조 컬러 정의 (index.html과 동일) */
+        :root {
+            --bs-primary: #002d61; /* 진한 파랑 */
+            --bs-a: rgb(82, 110, 146) ;
+            --bs-background: #f8f9fa; /* 흰색 배경 */
+            --bs-card-bg: #f8f9fa; /* 섹션 배경 (아주 밝은 회색) */
+            --bs-text: #333333; /* 어두운 텍스트 */
+            --bs-secondary-text: #6c757d; /* 보조 텍스트 */
+            --bs-border: #dee2e6; /* 경계선 */
+
+            /* 단계별 강조 색상 */
+            --step-1-color: #315a77;
+            --step-2-color: #5ca7b8;
+            --step-3-color: #1b5fac;
+            --step-4-color: #6392c7;
+            --step-5-color: #92b1d3;
+        }
+        body {
+            background-color: var(--bs-background);
+            color: var(--bs-text);
+        }
+        .text-primary { color: var(--bs-primary) !important; }
+        .text-a { color: var(--bs-a) !important; }
+        .bg-primary { background-color: var(--bs-primary) !important; }
+        .text-secondary { color: var(--bs-secondary-text) !important; }
+
+
+        /* 2. 섹션 간 간격 확대 */
+        section {
+            padding-top: 5rem; 
+            padding-bottom: 5rem;
+        }
+
+        /* 3. Navigation Active 스타일 */
+        .navbar-nav .nav-item .nav-link.active {
+            color: var(--bs-primary) !important;
+            font-weight: bold;
+        }
+
+        /* 4. Q&A 섹션 스타일 (이전과 동일) */
+        .answer-bubble {
+            background-color: var(--bs-a);
+            color: white;
+            border-radius: 1rem;
+            border-top-right-radius: 0;
+            max-width: 80%;
+        }
+        .professor-profile {
+            width: 50px; 
+            height: 50px; 
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        .question-box {
+            background-color: #e9ecef; 
+            border-radius: 0.5rem;
+            padding: 1rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .answer-bubble1 {
+            background-color: var(--bs-a);
+            color: white;
+            border-radius: 1rem;
+            /* 이전: border-top-right-radius: 0; -> 답변이 왼쪽에 있으므로 왼쪽 꼬리로 변경 */
+            border-top-left-radius: 0; 
+            margin-right: 20px ;
+           
+            margin-left: auto;
+        }
+        .professor-profile1 {
+            width: 50px; 
+            height: 50px; 
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        .question-box1 {
+            background-color: #e9ecef; 
+            border-radius: 1rem; /* 답변과 동일하게 둥글게 */
+            /* 질문이 오른쪽에 있으므로 오른쪽 꼬리 모양 적용 */
+            border-top-right-radius: 0; 
+            padding: 1rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 5. 벤치마킹 스타일 추가 (이미지/아이콘 + 텍스트) */
+        .feature-row {
+            padding: 3rem 0;
+            border-bottom: 1px solid #eee;
+            align-items: center; 
+        }
+        .feature-row:last-child {
+            border-bottom: none;
+        }
+        .feature-icon-container {
+            font-size: 3rem; 
+            color: var(--bs-primary);
+            text-align: center;
+        }
+
+        /* 💡 6. 맨 위로 버튼 스타일 추가 */
+        #scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none; /* 기본적으로 숨김 */
+            z-index: 999;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+        #scroll-to-top:hover {
+            background-color: var(--bs-primary);
+            filter: brightness(1.1);
+        }
+
+        .container-xl {
+            max-width: 1100px !important; /* 컨텐츠 영역을 1200px로 제한하여 양쪽에 여백 확보 */
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+        <div class="container-fluid container">
+            <a class="gaegu-regular navbar-brand fw-bold text-primary" href="index.html">
+                <img src="img/logo.jpg" alt="Logo" height="24" class="d-inline-block align-text-top me-2"> 
+                Data Science
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link fw-normal" href="index.html">HOME</a></li>
+                    <li class="nav-item"><a class="nav-link fw-normal" href="definition.html">정의</a></li> 
+                    <li class="nav-item"><a class="nav-link fw-normal" href="learning.html">학습내용</a></li>
+                    <li class="nav-item"><a class="nav-link active fw-normal" href="career.html">역량/진로</a></li> 
+                    <li class="nav-item"><a class="nav-link fw-normal" href="cases.html">활용사례</a></li>
+                    <li class="nav-item"><a class="nav-link fw-normal" href="resources.html">학습자원/플랫폼</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="main-header text-center">
+        <div class="container">
+            <h1 class="mb-3">데이터사이언스의 핵심 역량은 무엇을까?</h1>
+            <p class="lead text-white-50 mb-0">
+                데이터사이언스 역량에 대해 알아봅시다!
+            </p>
+            <div class="divider"></div>
+        </div>
+    </header>
+
+    <section>
+        <div class="container-xl">
+            <h1 class="display-5 text-center mb-4 fw-bold fs-2">
+                 필수 역량
+            </h1>
+            <p class="lead text-center text-secondary mb-5 border-bottom pb-5 fs-5">
+                데이터 전문가가 되기 위해 길러야 할 세 가지 핵심 역량
+            </p>
+
+            <div class="row feature-row">
+                <div class="col-md-4 feature-icon-container order-md-2 mb-5">
+                    <i class="bi bi-code-slash display-4 text-a"></i>
+                    <h5 class="fw-bold text-a mt-2">기술적 숙련도</h5>
+                </div>
+                <div class="col-md-8 order-md-2 mb-5">
+                    <h4 class="fw-bold text-dark mb-4">프로그래밍 및 모델링</h4>
+                    <p class="text-secondary">
+                        Python/R 기반의 프로그래밍, SQL을 통한 데이터베이스 조작, 
+                        <br>그리고 머신러닝/딥러닝 프레임워크 사용 능력
+                        <p class="text-secondary">기초적인 문법을 넘어 실제 프로젝트를 완성할 수 있는 응용력을 갖추는 것이 목표입니다.</p>
+                    </p>
+                    <span class="badge bg-secondary me-2 fw-semibold">Python & R</span>
+                    <span class="badge bg-secondary me-2 fw-semibold">ML/DL 모델링</span>
+                    <span class="badge bg-secondary fw-semibold">데이터 엔지니어링</span>
+                </div>
+            </div>
+
+            <div class="py-3" style="background-color: #e9ecefb3;">
+                <div class="row feature-row">
+                    <div class="col-md-4 feature-icon-container order-md-2">
+                        <i class="bi bi-lightbulb display-4" style="color: rgb(73, 115, 173) !important;"></i>
+                        <h5 class="fw-bold text-warning mt-2" style="color: rgb(73, 115, 173) !important;">분석적 사고</h5>
+                    </div>
+                    <div class="col-md-8 order-md-1 text-md-end mt-4 mb-4">
+                        <h4 class="fw-bold text-dark mb-4">통계적 해석 및 문제 해결</h4>
+                        <p class="text-secondary">
+                            데이터를 보고 비즈니스 문제의 원인을 찾아내고, 가설을 설정하며, 
+                            <br>결과를 통계적으로 논리정연하게 해석하는 능력
+                            <p class="text-secondary">단순히 모델의 성능 지표를 보는 것을 넘어 깊은 통찰(Insight)을 도출해야 합니다.</p>
+                        </p>
+                        <span class="badge bg-secondary me-2 fw-semibold">통계학/수학</span>
+                        <span class="badge bg-secondary fw-semibold">문제 정의</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row feature-row">
+                <div class="col-md-4 feature-icon-container order-md-1">
+                    <i class="bi bi-chat-dots display-4" style="color: #4396a3 !important;"></i>
+                    <h5 class="fw-bold mt-2" style="color: #4396a3 !important;">커뮤니케이션</h5>
+                </div>
+                <div class="col-md-8 order-md-2">
+                    <h4 class="fw-bold text-dark mt-5 mb-4">설득력 있는 결과 전달</h4>
+                    <p class="text-secondary">
+                        복잡한 분석 결과를 비전문가에게 쉽고 명료하게 설명하고, 
+                        <br>결과를 기반으로 효과적인 의사 결정을 이끌어내는 능력
+                    <p class="text-secondary">뛰어난 데이터 시각화와 구두 발표 능력이 필수적입니다.
+                    </p>
+                    </p>
+                    <span class="badge bg-secondary me-2 fw-semibold">데이터 시각화</span>
+                    <span class="badge bg-secondary fw-semibold">스토리텔링</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    
+    <section class="bg-white">
+        <div class="container-xl">
+            <h3 class="text-center mb-5 fw-bold text-dark border-bottom pb-5"><i class="bi bi-mic me-2 text-primary"></i> 
+                데이터사이언스 전문가가 되려면? Q&A</h3>
+            
+            <div class="row mb-5 justify-content-center">
+                <div class="col-lg-10">
+                    <div class="question-box mt-4 mb-3" style="margin-left: 70px; margin-right: 150px;">
+                        <p class="fw-semibold text-dark mb-0"> Q. &nbsp;데이터사이언스를 처음 접해보는 이들에게 가장 중요하게 준비해야 할 역량은 무엇일까요?</p>
+                    </div>
+                    <div class="d-flex justify-content-start align-items-end">
+                        <img src="img/img(6).png" alt="프로필" class="rounded-circle border border-2 me-3 professor-profile">
+                        <div class="answer-bubble p-3 shadow-sm">
+                            <p class="mb-0 small">
+                               가장 중요한 것은 프로그래밍 사고력과 기초 통계입니다. 당장의 복잡한 인공지능 모델보다도, 파이썬을 이용해 데이터를 다루는 능력과 통계적 개념을 확실히 잡는 것이 장기적인 성공의 열쇠입니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-5 mb-5 justify-content-center">
+                    <div class="col-lg-10">
+                        
+                        <div class="d-flex justify-content-end mb-3"> 
+                            <div class="question-box1 shadow-sm" style="max-width: 80%;">
+                                <p class="fw-semibold text-dark mb-0"> 
+                                    Q. &nbsp; 그렇다면, 데이터사이언스를 위해 수학/통계 지식이 얼마나 중요하고, 무엇부터 공부해야 할까요?
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-start align-items-end" style="margin-left: 130px;"> 
+                            <img src="img/img(6).png" alt="프로필" class="rounded-circle border border-2 me-3 professor-profile1 order-1 ms-auto">
+                            <div class="answer-bubble1 p-3 shadow-sm ms-auto">
+                                <p class="mb-0 small">
+                                     수학/통계 지식은 모델을 이해하고 결과를 논리적으로 해석하는 데 핵심적인 역할을 합니다. 
+                                     <br>순히 툴을 사용하는 것을 넘어 전문가가 되려면 필수입니다.
+                                     필수적으로 배워할 기초는 확률론과 선형대수학입니다. 
+                                     이 두 과목은 머신러닝 알고리즘(예: 회귀, PCA)의 작동 원리를 이해하는 기반이 됩니다.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-10">
+                    <div class="question-box mb-3" style="margin-left: 70px; margin-right: 300px;">
+                        <p class="fw-semibold text-dark mb-0"> Q. &nbsp;머신러닝 외에 데이터 엔지니어링 역량도 갖춰야 할까요?</p>
+                    </div>
+                    <div class="d-flex justify-content-start align-items-end">
+                        <img src="img/img(6).png" alt="프로필" class="rounded-circle border border-2 me-3 professor-profile">
+                        <div class="answer-bubble p-3 shadow-sm">
+                            <p class="mb-0 small">
+                               네, 필수적입니다. 데이터사이언티스트가 분석한 모델을 실제 서비스에 적용하기 위해서는 데이터 엔지니어링 지식이 필수입니다.
+                               <br>SQL을 마스터하여 대규모 데이터를 조회, 추출, 변환할 수 있어야 합니다. 또한, 클라우드 환경(AWS, Azure, GCP)이나 분산 처리 기술(Spark)에 대한 기본적인 이해는 실무에서 큰 경쟁력이 됩니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-light pt-0 pb-0">
+    </section>
+
+    <section class="container-xl mt-2 mb-5">
+        <h3 class="fw-bold text-dark mb-5 text-center"> 
+            전문가에게 질문하기
+        </h3>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card shadow-sm p-4">
+                    <form>
+                        <div class="mb-3">
+                            <label for="questionText" class="form-label fw-semibold">질문 내용:</label>
+                            <textarea class="form-control" id="questionText" rows="3" placeholder="궁금한 점을 구체적으로 입력해주세요."></textarea>
+                        </div>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="button" class="btn btn-secondary btn-lg" id="submitQuestionButton" onclick="handleSubmission()">
+                                <i class="bi bi-send-fill me-1"></i> 질문 제출
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-light text-dark py-5 border-top">
+        <div class="container-xl text-center">
+            </div>
+    </footer>
+    
+    <button onclick="topFunction()" id="scroll-to-top" class="btn btn-primary">
+        <i class="bi bi-arrow-up-short fs-4"></i>
+    </button>
+
+    <footer class="bg-light text-dark py-5 border-top">
+        <div class="container-xl text-center">
+             <hr>
+            <div class="text-center text-secondary mt-4 mb-2">
+                <p class="mb-1 small">
+                    01797 서울시 노원구 화랑로 621 데이터사이언스학과 | TEL. (02) 123-4567 | FAX. (02) 123-4568
+                </p>
+            </div>
+
+            <div class="text-center text-secondary">
+                <p class="mb-0 small">Copyright 2025 Data Science Guide. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <button onclick="topFunction()" id="scroll-to-top" class="btn btn-primary">
+        <i class="bi bi-arrow-up-short fs-4"></i>
+    </button>
+
+    <div class="modal fade" id="submitModal" tabindex="-1" aria-labelledby="submitModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="submitModalLabel">질문 제출 완료</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    전문가에게 질문이 성공적으로 전달되었습니다.<br>
+                    감사합니다!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> 
+    
+    <script>
+        function handleSubmission() {
+            // 1. textarea 요소 가져오기
+            const questionInput = document.getElementById('questionText'); 
+            const questionText = questionInput.value.trim();
+            
+            if (questionText === "") {
+                alert("질문 내용을 입력해주세요.");
+                return; // false 반환 대신 return만 사용 (button 타입이므로)
+            }
+
+            // 2. 모달 띄우기 (submitModal이 이제 HTML에 존재하므로 오류 없이 실행됨)
+            const submitModalElement = document.getElementById('submitModal');
+            const submitModal = new bootstrap.Modal(submitModalElement);
+            submitModal.show();
+            
+            // 3. 🚨 입력된 글씨를 빈 문자열로 초기화
+            questionInput.value = ''; 
+        }
+        
+        // (기존 스크롤 관련 함수 topFunction, scrollFunction 코드는 여기에 그대로 유지)
+    </script>
+    
+
+
+    <script>
+        // Get the button
+        let mybutton = document.getElementById("scroll-to-top");
+
+        // When the user scrolls down 100px from the top of the document, show the button
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+          if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+            mybutton.style.display = "block";
+          } else {
+            mybutton.style.display = "none";
+          }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+          document.body.scrollTop = 0; // For Safari
+          document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
+    </script>
+</body>
+</html>
